@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog · Suman Sinha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:           #f5f1eb;
+      --bg-alt:       #ede9e1;
+      --bg-card:      #ffffff;
+      --border:       rgba(60,50,30,0.12);
+      --border-strong:rgba(60,50,30,0.22);
+      --text:         #1c1812;
+      --text-mid:     #4a4030;
+      --text-muted:   #7a6e5e;
+      --text-dim:     #a89e8e;
+      --accent:       #b5873a;
+      --accent-light: #f0e4cc;
+      --accent-glow:  rgba(181,135,58,0.07);
+      --nav-bg:       rgba(245,241,235,0.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3rem;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover     { color: var(--accent); }
+    .nav-links a.active    { color: var(--accent); font-weight: 500; }
+
+    /* ─── ARTICLE WRAPPER ─── */
+    .article-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    /* back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    /* hero */
+    .article-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .article-wrap h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.12;
+      color: var(--text);
+      margin-bottom: 1.6rem;
+    }
+
+    .article-wrap h1 em { font-style: italic; color: var(--accent); }
+
+    /* meta bar */
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+
+    .meta-author {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .author-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .meta-date, .meta-read {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .article-tag {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      background: var(--accent-light);
+      border-radius: 2px;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* body typography */
+    .article-body p {
+      font-size: 1.02rem;
+      color: var(--text-mid);
+      line-height: 1.82;
+      margin-bottom: 1.6rem;
+    }
+
+    .article-body h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--text);
+      margin: 3rem 0 1rem;
+    }
+
+    .article-body h2 em { font-style: italic; color: var(--accent); }
+
+    .article-body h3 {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 2.5rem 0 0.8rem;
+    }
+
+    /* pull quote */
+    .pull-quote {
+      margin: 2.5rem 0;
+      padding: 1.6rem 2rem 1.6rem 1.8rem;
+      border-left: 2px solid var(--accent);
+      background: var(--accent-glow);
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* insight cards */
+    .insight-grid {
+      display: grid;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .insight-card {
+      background: var(--bg-card);
+      padding: 1.4rem 1.8rem;
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      transition: background 0.2s;
+    }
+
+    .insight-card:hover { background: var(--bg-alt); }
+
+    .insight-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      opacity: 0.5;
+      line-height: 1;
+      padding-top: 0.1rem;
+    }
+
+    .insight-card h4 {
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+
+    .insight-card p {
+      font-size: 0.85rem !important;
+      color: var(--text-muted) !important;
+      line-height: 1.65 !important;
+      margin: 0 !important;
+    }
+
+    /* divider */
+    .section-rule {
+      margin: 2.5rem 0;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* author bio card */
+    .author-bio {
+      margin-top: 3.5rem;
+      padding: 1.8rem 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .bio-avatar {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .bio-text h4 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .bio-text p {
+      font-size: 0.8rem !important;
+      color: var(--text-muted) !important;
+      line-height: 1.6 !important;
+      margin: 0 !important;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 2.2rem 3rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.73rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      background: var(--bg-alt);
+    }
+
+    footer a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .article-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Suman</a>
+    <ul class="nav-links">
+      <li><a href="index.html#expertise">Expertise</a></li>
+      <li><a href="index.html#career">Career</a></li>
+      <li><a href="index.html#contact">Connect</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+    </ul>
+  </nav>
+
+  <!-- ARTICLE -->
+  <div class="article-wrap">
+
+    <a href="blog.html" class="back-link">← Back to Home</a>
+
+    <p class="article-eyebrow">Perspectives · AI &amp; Delivery</p>
+
+    <h1>AI &amp; LLMs: What Every <em>Programme Manager</em> Needs to Know Now</h1>
+
+    <div class="article-meta">
+      <div class="meta-author">
+        <div class="author-dot">SS</div>
+        Suman Sinha · PMP®
+      </div>
+      <span class="meta-date">March 2026</span>
+      <span class="meta-read">8 min read</span>
+      <span class="article-tag">AI</span>
+      <span class="article-tag">PMO</span>
+      <span class="article-tag">Delivery</span>
+    </div>
+
+    <div class="article-body">
+
+      <p>
+        There is a version of this conversation happening in every PMO right now. Someone has asked "are we using AI?" and someone else has said "we're exploring it." The exploration, however, rarely gets past the chatbot demo. Meanwhile, the actual structural shift — the one that will change how programmes are governed, reported on, and delivered — is already underway.
+      </p>
+
+      <p>
+        I've spent the past year deliberately upskilling in applied AI and LLM tooling, not as a technology exercise, but as a delivery discipline. What follows is not a breathless overview of what AI can do. It is a practitioner's honest assessment of where it changes the work — and where it does not.
+      </p>
+
+      <div class="pull-quote">
+        "The PM who uses AI well will not be replaced by AI. But they will be out-competed by the PM who does."
+      </div>
+
+      <h2>Why This Moment Is <em>Different</em></h2>
+
+      <p>
+        Programme management has absorbed waves of tooling before — from desktop scheduling software to cloud-based PPM platforms to Agile collaboration suites. Each wave changed the interface without fundamentally changing the cognitive work of the PM. You still built the WBS, you still chased the risk register, you still sat in the RAG meeting deciding whether amber was really red.
+      </p>
+
+      <p>
+        LLMs are different in one specific, consequential way: they operate on language at scale, and programme management is almost entirely a language-based discipline. Status reports. Steering pack commentary. Risk articulations. Stakeholder communications. Lessons learned. All of it is language. And for the first time, there is a class of tool that can meaningfully assist with that language work — not by templating it, but by reasoning through it.
+      </p>
+
+      <h3>Where AI Is Already Changing the Work</h3>
+
+      <div class="insight-grid">
+
+        <div class="insight-card">
+          <div class="insight-num">01</div>
+          <div>
+            <h4>Status Reporting &amp; Narrative Generation</h4>
+            <p>The weekly status report is the most time-consuming low-value artefact in programme management. LLMs can draft from structured inputs — RAG status, milestone updates, risk movement — in seconds. The PM's job shifts from writing the narrative to editing it for accuracy and judgement. This alone returns hours per week per programme.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">02</div>
+          <div>
+            <h4>Risk &amp; Issue Analysis</h4>
+            <p>Feed a risk register into a capable LLM with the right prompt and ask it to identify interdependencies, flag underweighted risks, or draft mitigation options for the top five items. It will not replace the experienced PM's judgement, but it will surface patterns faster than a manual scan — especially across large portfolios with 50+ active risks.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">03</div>
+          <div>
+            <h4>Stakeholder Communication Drafting</h4>
+            <p>Escalation emails, ExCo briefing notes, regulator-facing summaries — these require careful calibration of tone, detail, and framing. LLMs are surprisingly capable here, particularly when given context about the audience and the desired outcome. The judgement of what to say remains yours; the first draft no longer needs to be.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">04</div>
+          <div>
+            <h4>Lessons Learned &amp; Knowledge Synthesis</h4>
+            <p>Most lessons learned exercises produce a document no one reads. LLMs can synthesise retrospective inputs, interview transcripts, and post-implementation review notes into structured, searchable insight. For PMOs managing multiple programmes, this is a meaningful step toward institutional memory that actually gets used.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">05</div>
+          <div>
+            <h4>Governance Framework Design</h4>
+            <p>When setting up a new PMO or redesigning governance for a programme, LLMs are useful thinking partners. Ask one to draft a RACI for a specific delivery model, critique a governance structure you've described, or generate tollgate criteria for a regulatory programme. It accelerates the thinking — the expert review is still essential, but the blank page problem is gone.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="section-rule" />
+
+      <h2>Where AI <em>Does Not</em> Replace the PM</h2>
+
+      <p>
+        Being honest about this matters, because the overclaim in either direction — "AI will do everything" or "AI changes nothing" — leads to bad decisions.
+      </p>
+
+      <p>
+        AI does not replace the PM's relationship capital. When a programme is in trouble and a senior stakeholder needs to be managed through a difficult conversation, no LLM is in the room. The trust built over months of consistent delivery, honest reporting, and showing up when things are hard — that is human work and will remain so.
+      </p>
+
+      <p>
+        AI does not replace escalation judgement. Knowing when to escalate, to whom, and in what framing is one of the highest-value skills a PM develops. It requires organisational reading, political awareness, and an understanding of what each stakeholder can hear at any given moment. An LLM can help you draft the escalation once you've decided to make it; it cannot decide for you.
+      </p>
+
+      <p>
+        AI does not replace accountability. The PM who signs off the steering pack owns what is in it — regardless of who or what produced the first draft. As AI-assisted delivery becomes normal, the quality of the PM's review and judgement will matter more, not less.
+      </p>
+
+      <div class="pull-quote">
+        "The question is not whether to use AI. It is whether your PMO has a considered, deliberate approach to how it does so — or is leaving that to chance."
+      </div>
+
+      <h2>A Practitioner's Starting Point</h2>
+
+      <p>
+        If you are a Programme Manager or PMO Lead wondering where to start, here is a practical sequence: begin with the artefacts you produce most frequently and find most repetitive. Status reports, meeting summaries, risk narratives. Learn to prompt well — specificity, context, and desired output format all matter significantly. Audit the output critically before it goes anywhere. Then, once you have a feel for where the tool earns its place, start thinking about where it changes your governance model.
+      </p>
+
+      <p>
+        The PMOs that will be ahead in three years are not the ones that ran the most pilots. They are the ones that made considered, deliberate choices about AI integration — and built that into how they work, not as a feature, but as a capability.
+      </p>
+
+      <p>
+        That work starts now.
+      </p>
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="bio-avatar">SS</div>
+        <div class="bio-text">
+          <h4>Suman Sinha · PMP®</h4>
+          <p>Portfolio Manager and PMO Leader with 15 years across aerospace, financial markets, banking, and enterprise technology. Currently upskilling in applied AI and LLM tooling as part of next-generation delivery practice. Based in Bengaluru, India.</p>
+        </div>
+      </div>
+
+    </div><!-- /article-body -->
+  </div><!-- /article-wrap -->
+
+  <footer>
+    <p>© 2026 Suman · <a href="index.html">Home</a> · <a href="https://www.linkedin.com/in/sk-sinha/">LinkedIn</a> · <a href="/cdn-cgi/l/email-protection#86f5f3ebe7e8a8f5efe8eee7c6e9f3f2eae9e9eda8efe8">Email</a></p>
+    <p style="margin-top:0.35rem;">Built with precision, like every
