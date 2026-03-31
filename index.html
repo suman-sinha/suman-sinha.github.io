@@ -2,103 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Suman — Portfolio Manager & PMO Leader</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suman · Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --ink:      #0f0e0c;
-      --paper:    #f5f1ea;
-      --cream:    #ede8de;
-      --gold:     #b8963e;
-      --gold-lt:  #d4b06a;
-      --rust:     #8c4a2f;
-      --slate:    #4a5568;
-      --muted:    #9e9a93;
-      --rule:     rgba(15,14,12,0.12);
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #161616;
+      --border: rgba(255,255,255,0.08);
+      --text: #e8e4dc;
+      --text-muted: rgba(232,228,220,0.5);
+      --text-dim: rgba(232,228,220,0.3);
+      --accent: #c8a96e;
+      --accent-dim: rgba(200,169,110,0.15);
+      --accent-glow: rgba(200,169,110,0.06);
     }
 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 18px;
-      line-height: 1.6;
-      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Noise grain overlay ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.55;
-    }
-
-    /* ── Typography helpers ── */
-    .mono  { font-family: 'DM Mono', monospace; font-weight: 300; }
-    .syne  { font-family: 'Syne', sans-serif; }
-    .italic { font-style: italic; }
-
-    /* ── Rule / divider ── */
-    .rule {
-      width: 100%;
-      height: 1px;
-      background: var(--rule);
-    }
-
-    /* ══════════════════════════════
-       HERO
-    ══════════════════════════════ */
-    #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      padding: 2.5rem clamp(1.5rem, 6vw, 6rem);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Large watermark number */
-    #hero::after {
-      content: '15';
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(14rem, 30vw, 28rem);
-      font-weight: 800;
-      color: rgba(184,150,62,0.07);
-      position: absolute;
-      right: -2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .hero-top {
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      padding-top: 0.5rem;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
 
-    .site-id {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.02em;
     }
 
     .nav-links {
@@ -108,759 +62,746 @@
     }
 
     .nav-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--slate);
+      color: var(--text-muted);
       text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--gold); }
 
-    .hero-center {
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a.blog-link { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 90vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 4rem 0 2rem;
+      padding: 6rem 3rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
     }
 
-    .eyebrow {
-      font-family: 'DM Mono', monospace;
+    .hero-eyebrow {
       font-size: 0.72rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.2rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.1s;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
     }
 
-    h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.4rem, 8vw, 7.5rem);
-      font-weight: 300;
-      line-height: 1.0;
-      letter-spacing: -0.01em;
-      max-width: 14ch;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.25s;
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      max-width: 780px;
+      animation: fadeUp 0.6s 0.1s ease both;
     }
 
-    h1 em {
+    .hero h1 em {
       font-style: italic;
-      color: var(--rust);
+      color: var(--accent);
     }
 
-    .hero-tagline {
-      margin-top: 2rem;
-      font-size: 1.15rem;
-      font-weight: 300;
-      color: var(--slate);
-      max-width: 52ch;
+    .hero-sub {
+      margin-top: 1.8rem;
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 560px;
       line-height: 1.7;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.4s;
+      animation: fadeUp 0.6s 0.2s ease both;
     }
 
-    .hero-cta-row {
-      margin-top: 2.8rem;
+    .hero-actions {
+      margin-top: 2.5rem;
       display: flex;
-      gap: 1.2rem;
-      align-items: center;
+      gap: 1rem;
       flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.55s;
+      animation: fadeUp 0.6s 0.3s ease both;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
+      gap: 0.4rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       text-decoration: none;
-      padding: 0.75rem 1.6rem;
-      border: 1px solid currentColor;
-      transition: background 0.2s, color 0.2s;
+      transition: all 0.2s;
       cursor: pointer;
     }
 
     .btn-primary {
-      background: var(--ink);
-      color: var(--paper);
-      border-color: var(--ink);
+      background: var(--accent);
+      color: #0a0a0a;
+      font-weight: 500;
     }
-    .btn-primary:hover { background: var(--gold); border-color: var(--gold); }
+
+    .btn-primary:hover { background: #d4b878; }
 
     .btn-ghost {
-      background: transparent;
-      color: var(--ink);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
     }
-    .btn-ghost:hover { background: var(--ink); color: var(--paper); }
 
-    .hero-bottom {
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-stats {
+      margin-top: 4rem;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding-bottom: 0.5rem;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.7s;
+      gap: 3rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
     }
 
-    .scroll-hint {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .scroll-line {
-      width: 36px;
-      height: 1px;
-      background: var(--muted);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .year-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-
-    /* ══════════════════════════════
-       STATS BAR
-    ══════════════════════════════ */
-    #stats {
-      background: var(--ink);
-      color: var(--paper);
-      padding: 2.2rem clamp(1.5rem, 6vw, 6rem);
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1.5rem 3rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .stat-item { text-align: center; }
-
-    .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--gold-lt);
+    .stat-item { }
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--text);
       line-height: 1;
     }
-
     .stat-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.16em;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(245,241,234,0.5);
+      color: var(--text-dim);
       margin-top: 0.3rem;
     }
 
-    /* ══════════════════════════════
-       SECTION COMMONS
-    ══════════════════════════════ */
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 3rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      animation: fadeUp 0.6s 0.6s ease both;
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 2rem;
+      right: 3rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      animation: fadeUp 0.6s 0.5s ease both;
+    }
+
+    /* ── SECTIONS ── */
     section {
-      padding: 5rem clamp(1.5rem, 6vw, 6rem);
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
     }
 
     .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.22em;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      max-width: 3rem;
-      height: 1px;
-      background: var(--gold);
-      opacity: 0.4;
-    }
-
-    h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      font-weight: 300;
-      line-height: 1.15;
-      max-width: 24ch;
-      margin-bottom: 1.8rem;
-    }
-
-    h2 em { font-style: italic; color: var(--rust); }
-
-    /* ══════════════════════════════
-       EXPERTISE
-    ══════════════════════════════ */
-    #expertise {
-      background: var(--cream);
-    }
-
-    .expertise-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 0;
-      margin-top: 1rem;
-      border: 1px solid var(--rule);
-    }
-
-    .expertise-card {
-      padding: 2rem 1.8rem;
-      border-right: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-      transition: background 0.25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .expertise-card:hover { background: var(--paper); }
-
-    .expertise-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px;
-      height: 0;
-      background: var(--gold);
-      transition: height 0.35s ease;
-    }
-    .expertise-card:hover::before { height: 100%; }
-
-    .card-icon {
-      font-size: 1.5rem;
+      color: var(--accent);
       margin-bottom: 0.8rem;
-      line-height: 1;
     }
 
-    .card-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+    .section-heading {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 3rem;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── EXPERTISE ── */
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .capability-card {
+      background: var(--surface);
+      padding: 2rem;
+      transition: background 0.2s;
+    }
+
+    .capability-card:hover { background: var(--surface-2); }
+
+    .capability-icon {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .capability-card h3 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
       margin-bottom: 0.6rem;
+      color: var(--text);
     }
 
-    .card-body {
-      font-size: 0.92rem;
-      font-weight: 300;
-      color: var(--slate);
+    .capability-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
       line-height: 1.65;
     }
 
-    /* ══════════════════════════════
-       CAREER TIMELINE
-    ══════════════════════════════ */
-    #career {
-      background: var(--paper);
-    }
+    /* ── CAREER ── */
+    .career-list { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); }
 
-    .timeline {
-      position: relative;
-      margin-top: 1rem;
-      padding-left: 1.8rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.4rem;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-    }
-
-    .tl-item {
-      position: relative;
-      padding: 0 0 3rem 2.5rem;
-      opacity: 0;
-      transform: translateX(-12px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .tl-item.visible { opacity: 1; transform: translateX(0); }
-
-    .tl-dot {
-      position: absolute;
-      left: -0.42rem;
-      top: 0.38rem;
-      width: 0.85rem;
-      height: 0.85rem;
-      border-radius: 50%;
-      background: var(--paper);
-      border: 2px solid var(--gold);
+    .career-item {
+      background: var(--surface);
+      padding: 2rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
       transition: background 0.2s;
     }
-    .tl-item:hover .tl-dot { background: var(--gold); }
 
-    .tl-period {
-      font-family: 'DM Mono', monospace;
+    .career-item:hover { background: var(--surface-2); }
+
+    .career-item .industry-badge {
       font-size: 0.65rem;
-      letter-spacing: 0.16em;
-      color: var(--muted);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 0.3rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
     }
 
-    .tl-role {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 0.15rem;
-    }
-
-    .tl-org {
-      font-size: 1rem;
-      font-weight: 300;
-      font-style: italic;
-      color: var(--rust);
-      margin-bottom: 0.7rem;
-    }
-
-    .tl-desc {
+    .career-item h3 {
       font-size: 0.95rem;
-      font-weight: 300;
-      color: var(--slate);
-      line-height: 1.7;
-      max-width: 60ch;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.2rem;
     }
 
-    /* ══════════════════════════════
-       INDUSTRIES
-    ══════════════════════════════ */
-    #industries {
-      background: var(--ink);
-      color: var(--paper);
+    .career-item .company {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
     }
 
-    #industries .section-label { color: var(--gold-lt); }
-
-    .industry-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      margin-top: 1.5rem;
-      border: 1px solid rgba(255,255,255,0.1);
+    .career-item p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.65;
     }
 
-    .industry-pill {
-      flex: 1 1 calc(50% - 0px);
-      padding: 2.2rem 2rem;
-      border-right: 1px solid rgba(255,255,255,0.1);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      position: relative;
-      overflow: hidden;
-      cursor: default;
-      transition: background 0.3s;
-    }
-    .industry-pill:hover { background: rgba(184,150,62,0.1); }
-
-    .ind-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem;
-      font-weight: 300;
-      color: rgba(184,150,62,0.2);
-      line-height: 1;
-      position: absolute;
-      right: 1rem;
-      top: 0.8rem;
-    }
-
-    .ind-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .ind-org {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: rgba(245,241,234,0.45);
-      margin-top: 0.3rem;
-      letter-spacing: 0.1em;
-    }
-
-    /* ══════════════════════════════
-       DIFFERENTIATORS
-    ══════════════════════════════ */
-    #differentiators {
-      background: var(--cream);
-    }
-
-    .diff-list {
+    /* ── INDUSTRIES ── */
+    .industry-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
     }
 
-    .diff-item {
+    .industry-card {
+      background: var(--surface);
+      padding: 2rem;
       display: flex;
-      gap: 1.2rem;
+      gap: 1rem;
       align-items: flex-start;
     }
 
-    .diff-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
-      font-weight: 300;
-      color: var(--gold);
+    .industry-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      color: var(--accent);
+      opacity: 0.4;
       line-height: 1;
-      flex-shrink: 0;
-      width: 2rem;
-      text-align: right;
     }
 
-    .diff-text strong {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 700;
-      display: block;
-      margin-bottom: 0.3rem;
+    .industry-card h3 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
     }
 
-    .diff-text p {
-      font-size: 0.93rem;
-      font-weight: 300;
-      color: var(--slate);
+    .industry-card p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ── DIFFERENTIATORS ── */
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .diff-card {
+      background: var(--surface);
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 1rem;
+    }
+
+    .diff-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--accent);
+      opacity: 0.5;
+    }
+
+    .diff-card h3 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .diff-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
       line-height: 1.65;
     }
 
-    /* ══════════════════════════════
-       CONTACT / FOOTER
-    ══════════════════════════════ */
-    #contact {
-      background: var(--paper);
-      text-align: center;
-      padding: 6rem clamp(1.5rem, 6vw, 6rem);
+    /* ── BLOG TEASER ── */
+    .blog-teaser-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
-    #contact h2 {
-      max-width: 100%;
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
+    .blog-teaser-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
     }
 
-    .contact-sub {
-      font-size: 1rem;
-      font-weight: 300;
-      color: var(--slate);
-      margin-bottom: 2.5rem;
+    .blog-card {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      padding: 2.5rem;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
     }
 
+    .blog-card:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .blog-card-tags {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .blog-tag {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      background: rgba(200,169,110,0.1);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: 2px;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .blog-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.7rem;
+    }
+
+    .blog-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 580px;
+    }
+
+    .blog-card .blog-meta {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      margin-top: 1rem;
+    }
+
+    .blog-card-arrow {
+      font-size: 1.5rem;
+      color: var(--accent);
+      opacity: 0.5;
+      transition: opacity 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .blog-card:hover .blog-card-arrow {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    .blog-teaser-footer {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* ── CONTACT ── */
     .contact-links {
       display: flex;
-      justify-content: center;
-      gap: 1.2rem;
+      gap: 1rem;
       flex-wrap: wrap;
     }
 
-    footer {
-      background: var(--ink);
-      color: rgba(245,241,234,0.4);
-      padding: 1.5rem clamp(1.5rem, 6vw, 6rem);
-      display: flex;
-      justify-content: space-between;
+    .contact-link {
+      display: inline-flex;
       align-items: center;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      flex-wrap: wrap;
       gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.2s;
     }
 
-    footer a { color: var(--gold-lt); text-decoration: none; }
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
-    /* ══════════════════════════════
-       ANIMATIONS
-    ══════════════════════════════ */
+    .contact-note {
+      margin-bottom: 2rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 3rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    footer a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50%       { opacity: 1; }
-    }
-
-    /* ══════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════ */
     @media (max-width: 640px) {
-      .nav-links { display: none; }
-      #hero::after { display: none; }
-      .industry-pill { flex: 1 1 100%; }
+      nav { padding: 1rem 1.5rem; }
+      section, .blog-teaser-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .hero { padding: 5rem 1.5rem 3rem; }
+      .hero-scroll, .hero-badge { display: none; }
+      .blog-card { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── HERO ── -->
-<section id="hero">
-  <div class="hero-top">
-    <span class="site-id">Suman · Portfolio</span>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#expertise">Expertise</a></li>
-        <li><a href="#career">Career</a></li>
-        <li><a href="#industries">Industries</a></li>
-        <li><a href="#contact">Connect</a></li>
-      </ul>
-    </nav>
-  </div>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Suman</a>
+    <ul class="nav-links">
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#career">Career</a></li>
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="#contact">Connect</a></li>
+      <li><a href="blog.html" class="blog-link">Blog</a></li>
+    </ul>
+  </nav>
 
-  <div class="hero-center">
-    <p class="eyebrow">Portfolio Manager · PMO Leader · AI Practitioner</p>
-    <h1>Delivering<br>order from<br><em>complexity.</em></h1>
-    <p class="hero-tagline">
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Portfolio Manager · PMO Leader · AI Practitioner</p>
+    <h1>Delivering order from <em>complexity.</em></h1>
+    <p class="hero-sub">
       Fifteen years steering cross-industry portfolios — from aerospace supply chains to financial market infrastructure — turning regulatory pressure, transformation mandates, and competing priorities into measurable outcomes.
     </p>
-    <div class="hero-cta-row">
+    <div class="hero-actions">
       <a href="#career" class="btn btn-primary">View Career ↓</a>
       <a href="#contact" class="btn btn-ghost">Connect →</a>
     </div>
-  </div>
-
-  <div class="hero-bottom">
-    <span class="scroll-hint"><span class="scroll-line"></span> Scroll</span>
-    <span class="year-tag">PMP® Certified · Bengaluru, India</span>
-  </div>
-</section>
-
-<!-- ── STATS BAR ── -->
-<div id="stats">
-  <div class="stat-item">
-    <div class="stat-num">15</div>
-    <div class="stat-label">Years Experience</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">4</div>
-    <div class="stat-label">Industries</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">0</div>
-    <div class="stat-label">Regulatory Breaches</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">∞</div>
-    <div class="stat-label">Stakeholders Managed</div>
-  </div>
-</div>
-
-<!-- ── EXPERTISE ── -->
-<section id="expertise">
-  <p class="section-label">Core Capabilities</p>
-  <h2>Where <em>structure</em> meets strategic delivery.</h2>
-
-  <div class="expertise-grid">
-    <div class="expertise-card">
-      <div class="card-icon">🗂</div>
-      <div class="card-title">Portfolio Governance</div>
-      <p class="card-body">Designing and running portfolio-level oversight frameworks — prioritisation, dependency mapping, capacity planning, and executive reporting — across simultaneous regulatory and transformation mandates.</p>
-    </div>
-    <div class="expertise-card">
-      <div class="card-icon">🏛</div>
-      <div class="card-title">PMO Setup & Maturity</div>
-      <p class="card-body">Establishing PMOs from scratch and elevating existing functions: delivery standards, tollgate governance, risk registers, and the cadences that keep programmes honest.</p>
-    </div>
-    <div class="expertise-card">
-      <div class="card-icon">⚖️</div>
-      <div class="card-title">Regulatory Programme Delivery</div>
-      <p class="card-body">End-to-end accountability on hard-deadline regulatory programmes. Recovered a delayed programme and delivered ahead of a Tax regulator's deadline — zero breaches across full tenure.</p>
-    </div>
-    <div class="expertise-card">
-      <div class="card-icon">🔀</div>
-      <div class="card-title">Complex Data Migration</div>
-      <p class="card-body">Sole ownership of an LSEG data migration workstream from inception through Early Life Support — including planning, cutover, hypercare, and stakeholder sign-off.</p>
-    </div>
-    <div class="expertise-card">
-      <div class="card-icon">💬</div>
-      <div class="card-title">Stakeholder Management</div>
-      <p class="card-body">Navigating C-suite, regulators, and delivery teams across banking, fintech, aerospace, and consulting — building trust under pressure and translating complexity into clear decisions.</p>
-    </div>
-    <div class="expertise-card">
-      <div class="card-icon">🤖</div>
-      <div class="card-title">AI / LLM Literacy</div>
-      <p class="card-body">Actively upskilling in applied AI and LLM tooling — positioning portfolio and PMO practice to operate in AI-augmented delivery environments.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── CAREER TIMELINE ── -->
-<section id="career">
-  <p class="section-label">Career Journey</p>
-  <h2>A track record built across <em>borders & sectors.</em></h2>
-
-  <div class="timeline" id="timeline">
-
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-period">Banking Transformation · Recent</div>
-      <div class="tl-role">Portfolio Manager / PMO Lead</div>
-      <div class="tl-org">Capgemini</div>
-      <p class="tl-desc">
-        Led simultaneous regulatory and transformation portfolios at peak scale. Recovered a delayed regulatory programme and delivered it ahead of a hard Tax regulator deadline. Maintained zero regulatory breaches across the entire tenure. Role concluded through organisational restructuring.
-      </p>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-period">Financial Markets Infrastructure</div>
-      <div class="tl-role">Programme / PMO Delivery</div>
-      <div class="tl-org">LSEG (London Stock Exchange Group)</div>
-      <p class="tl-desc">
-        Managed multiple workstreams within a wider enterprise programme. Sole end-to-end ownership of a critical data migration workstream — from initial planning through execution, cutover, and Early Life Support.
-      </p>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-period">Aerospace</div>
-      <div class="tl-role">Project / Portfolio Management</div>
-      <div class="tl-org">Honeywell</div>
-      <p class="tl-desc">
-        Cross-functional portfolio and project delivery within aerospace operations — building foundational strengths in governance, financial control, and structured delivery methodologies.
-      </p>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-period">Enterprise Technology · Early Career</div>
-      <div class="tl-role">Project Support / Delivery</div>
-      <div class="tl-org">TCS</div>
-      <p class="tl-desc">
-        Supported SAP as a client on an intranet portal backend — building cross-functional delivery experience and a systems-thinking mindset at the start of a 15-year career.
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── INDUSTRIES ── -->
-<section id="industries">
-  <p class="section-label">Industry Footprint</p>
-  <h2>Cross-industry breadth <em>as a differentiator.</em></h2>
-
-  <div class="industry-row">
-    <div class="industry-pill">
-      <span class="ind-num">01</span>
-      <div class="ind-name">Aerospace</div>
-      <div class="ind-org">Honeywell</div>
-    </div>
-    <div class="industry-pill">
-      <span class="ind-num">02</span>
-      <div class="ind-name">Financial Markets Infrastructure</div>
-      <div class="ind-org">LSEG</div>
-    </div>
-    <div class="industry-pill">
-      <span class="ind-num">03</span>
-      <div class="ind-name">Banking Transformation</div>
-      <div class="ind-org">Capgemini</div>
-    </div>
-    <div class="industry-pill">
-      <span class="ind-num">04</span>
-      <div class="ind-name">Enterprise Technology</div>
-      <div class="ind-org">TCS</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── DIFFERENTIATORS ── -->
-<section id="differentiators">
-  <p class="section-label">What Sets Me Apart</p>
-  <h2>Not just delivery — <em>accountable leadership.</em></h2>
-
-  <div class="diff-list">
-    <div class="diff-item">
-      <div class="diff-num">1</div>
-      <div class="diff-text">
-        <strong>Simultaneous Portfolio Complexity</strong>
-        <p>Proven ability to hold regulatory and transformation mandates in parallel — without letting urgency on one compromise governance on the other.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">15</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Industries</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0</div>
+        <div class="stat-label">Regulatory Breaches</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Stakeholders Managed</div>
       </div>
     </div>
-    <div class="diff-item">
-      <div class="diff-num">2</div>
-      <div class="diff-text">
-        <strong>Regulatory Recovery Under Pressure</strong>
-        <p>Took a behind-schedule regulatory programme and delivered it ahead of a hard statutory deadline — no breaches, no escalations, full sign-off.</p>
+    <div class="hero-scroll">Scroll</div>
+    <div class="hero-badge">PMP® Certified · Bengaluru, India</div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- EXPERTISE -->
+  <section id="expertise">
+    <p class="section-label">Core Capabilities</p>
+    <h2 class="section-heading">Where <em>structure</em> meets strategic delivery.</h2>
+    <div class="capabilities-grid">
+      <div class="capability-card">
+        <div class="capability-icon">🗂</div>
+        <h3>Portfolio Governance</h3>
+        <p>Designing and running portfolio-level oversight frameworks — prioritisation, dependency mapping, capacity planning, and executive reporting — across simultaneous regulatory and transformation mandates.</p>
+      </div>
+      <div class="capability-card">
+        <div class="capability-icon">🏛</div>
+        <h3>PMO Setup &amp; Maturity</h3>
+        <p>Establishing PMOs from scratch and elevating existing functions: delivery standards, tollgate governance, risk registers, and the cadences that keep programmes honest.</p>
+      </div>
+      <div class="capability-card">
+        <div class="capability-icon">⚖️</div>
+        <h3>Regulatory Programme Delivery</h3>
+        <p>End-to-end accountability on hard-deadline regulatory programmes. Recovered a delayed programme and delivered ahead of a Tax regulator's deadline — zero breaches across full tenure.</p>
+      </div>
+      <div class="capability-card">
+        <div class="capability-icon">🔀</div>
+        <h3>Complex Data Migration</h3>
+        <p>Sole ownership of an LSEG data migration workstream from inception through Early Life Support — including planning, cutover, hypercare, and stakeholder sign-off.</p>
+      </div>
+      <div class="capability-card">
+        <div class="capability-icon">💬</div>
+        <h3>Stakeholder Management</h3>
+        <p>Navigating C-suite, regulators, and delivery teams across banking, fintech, aerospace, and consulting — building trust under pressure and translating complexity into clear decisions.</p>
+      </div>
+      <div class="capability-card">
+        <div class="capability-icon">🤖</div>
+        <h3>AI / LLM Literacy</h3>
+        <p>Actively upskilling in applied AI and LLM tooling — positioning portfolio and PMO practice to operate in AI-augmented delivery environments.</p>
       </div>
     </div>
-    <div class="diff-item">
-      <div class="diff-num">3</div>
-      <div class="diff-text">
-        <strong>End-to-End Ownership Mindset</strong>
-        <p>From PMO setup and governance design through to Early Life Support and hypercare — full lifecycle accountability rather than handover at go-live.</p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CAREER -->
+  <section id="career">
+    <p class="section-label">Career Journey</p>
+    <h2 class="section-heading">A track record built across <em>borders &amp; sectors.</em></h2>
+    <div class="career-list">
+      <div class="career-item">
+        <div>
+          <p class="industry-badge">Banking Transformation · Recent</p>
+          <h3>Portfolio Manager / PMO Lead</h3>
+          <p class="company">Capgemini</p>
+          <p>Led simultaneous regulatory and transformation portfolios at peak scale. Recovered a delayed regulatory programme and delivered it ahead of a hard Tax regulator deadline. Maintained zero regulatory breaches across the entire tenure. Role concluded through organisational restructuring.</p>
+        </div>
+      </div>
+      <div class="career-item">
+        <div>
+          <p class="industry-badge">Financial Markets Infrastructure</p>
+          <h3>Programme / PMO Delivery</h3>
+          <p class="company">LSEG (London Stock Exchange Group)</p>
+          <p>Managed multiple workstreams within a wider enterprise programme. Sole end-to-end ownership of a critical data migration workstream — from initial planning through execution, cutover, and Early Life Support.</p>
+        </div>
+      </div>
+      <div class="career-item">
+        <div>
+          <p class="industry-badge">Aerospace</p>
+          <h3>Project / Portfolio Management</h3>
+          <p class="company">Honeywell</p>
+          <p>Cross-functional portfolio and project delivery within aerospace operations — building foundational strengths in governance, financial control, and structured delivery methodologies.</p>
+        </div>
+      </div>
+      <div class="career-item">
+        <div>
+          <p class="industry-badge">Enterprise Technology · Early Career</p>
+          <h3>Project Support / Delivery</h3>
+          <p class="company">TCS</p>
+          <p>Supported SAP as a client on an intranet portal backend — building cross-functional delivery experience and a systems-thinking mindset at the start of a 15-year career.</p>
+        </div>
       </div>
     </div>
-    <div class="diff-item">
-      <div class="diff-num">4</div>
-      <div class="diff-text">
-        <strong>Cross-Industry Pattern Recognition</strong>
-        <p>Four distinct industries means pattern-matching across contexts — spotting governance failures early because you've seen the same shape before in a different sector.</p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- INDUSTRIES -->
+  <section id="industries">
+    <p class="section-label">Industry Footprint</p>
+    <h2 class="section-heading">Cross-industry breadth <em>as a differentiator.</em></h2>
+    <div class="industry-grid">
+      <div class="industry-card">
+        <div class="industry-number">01</div>
+        <div>
+          <h3>Aerospace</h3>
+          <p>Honeywell</p>
+        </div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-number">02</div>
+        <div>
+          <h3>Financial Markets Infrastructure</h3>
+          <p>LSEG</p>
+        </div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-number">03</div>
+        <div>
+          <h3>Banking Transformation</h3>
+          <p>Capgemini</p>
+        </div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-number">04</div>
+        <div>
+          <h3>Enterprise Technology</h3>
+          <p>TCS</p>
+        </div>
       </div>
     </div>
-    <div class="diff-item">
-      <div class="diff-num">5</div>
-      <div class="diff-text">
-        <strong>Agile Fluency on a Waterfall Foundation</strong>
-        <p>A strong structured-delivery background now complemented by Agile/SAFe methodology — able to operate in, bridge, or redesign hybrid delivery environments.</p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- DIFFERENTIATORS -->
+  <section>
+    <p class="section-label">What Sets Me Apart</p>
+    <h2 class="section-heading">Not just delivery — <em>accountable leadership.</em></h2>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-num">1</div>
+        <div>
+          <h3>Simultaneous Portfolio Complexity</h3>
+          <p>Proven ability to hold regulatory and transformation mandates in parallel — without letting urgency on one compromise governance on the other.</p>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">2</div>
+        <div>
+          <h3>Regulatory Recovery Under Pressure</h3>
+          <p>Took a behind-schedule regulatory programme and delivered it ahead of a hard statutory deadline — no breaches, no escalations, full sign-off.</p>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">3</div>
+        <div>
+          <h3>End-to-End Ownership Mindset</h3>
+          <p>From PMO setup and governance design through to Early Life Support and hypercare — full lifecycle accountability rather than handover at go-live.</p>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">4</div>
+        <div>
+          <h3>Cross-Industry Pattern Recognition</h3>
+          <p>Four distinct industries means pattern-matching across contexts — spotting governance failures early because you've seen the same shape before in a different sector.</p>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">5</div>
+        <div>
+          <h3>Agile Fluency on a Waterfall Foundation</h3>
+          <p>A strong structured-delivery background now complemented by Agile/SAFe methodology — able to operate in, bridge, or redesign hybrid delivery environments.</p>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-num">6</div>
+        <div>
+          <h3>AI-Augmented Practice</h3>
+          <p>Actively integrating LLM and AI tooling into portfolio and PMO workflows — building the skills to lead delivery in the next generation of operating models.</p>
+        </div>
       </div>
     </div>
-    <div class="diff-item">
-      <div class="diff-num">6</div>
-      <div class="diff-text">
-        <strong>AI-Augmented Practice</strong>
-        <p>Actively integrating LLM and AI tooling into portfolio and PMO workflows — building the skills to lead delivery in the next generation of operating models.</p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ── BLOG TEASER (NEW) ── -->
+  <div class="blog-teaser-section">
+    <div class="blog-teaser-inner">
+      <p class="section-label">From the Blog</p>
+      <h2 class="section-heading">Perspectives on <em>delivery, governance &amp; AI.</em></h2>
+
+      <a href="blog.html" class="blog-card">
+        <div>
+          <div class="blog-card-tags">
+            <span class="blog-tag">AI</span>
+            <span class="blog-tag">PMO</span>
+            <span class="blog-tag">Delivery</span>
+          </div>
+          <h3>AI &amp; LLMs: What Every Programme Manager Needs to Know Now</h3>
+          <p>A practitioner's honest assessment of where AI is already changing how portfolios are governed, reported on, and delivered — and where the PM's judgement remains irreplaceable.</p>
+          <p class="blog-meta">March 2026 · 8 min read</p>
+        </div>
+        <div class="blog-card-arrow">→</div>
+      </a>
+
+      <div class="blog-teaser-footer">
+        <a href="blog.html" class="btn btn-ghost">Read the Article →</a>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ── CONTACT ── -->
-<section id="contact">
-  <p class="section-label" style="justify-content:center">Let's Connect</p>
-  <h2>Open to <em>Portfolio Manager</em> &amp; PMO Lead / Head roles.</h2>
-  <p class="contact-sub">Available for full-time opportunities across industries · Also accepting freelance engagements via Toptal</p>
-  <div class="contact-links">
-    <a href="https://www.linkedin.com/in/sk-sinha/" target="_blank" class="btn btn-primary">LinkedIn →</a>
-    <a href="https://github.com/suman-sinha" target="_blank" class="btn btn-ghost">GitHub →</a>
-    <a href="mailto:suman.sinha@outlook.in" class="btn btn-ghost">Email →</a>
-  </div>
-</section>
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Let's Connect</p>
+    <h2 class="section-heading">Open to <em>Portfolio Manager</em> &amp; PMO Lead / Head roles.</h2>
+    <p class="contact-note">
+      Available for full-time opportunities across industries · Also accepting freelance engagements via Toptal
+    </p>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/sk-sinha/" class="contact-link">LinkedIn →</a>
+      <a href="https://github.com/suman-sinha" class="contact-link">GitHub →</a>
+      <a href="mailto:suman.sinha@outlook.in" class="contact-link">Email →</a>
+    </div>
+  </section>
 
-<!-- ── FOOTER ── -->
-<footer>
-  <span>© 2026 Suman · All rights reserved</span>
-  <span>PMP® · Portfolio Manager · Bengaluru, India</span>
-  <span>Built with precision, like every programme.</span>
-</footer>
-
-<!-- ── SCROLL ANIMATION ── -->
-<script>
-  const observer = new IntersectionObserver(
-    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.15 }
-  );
-  document.querySelectorAll('.tl-item').forEach(el => observer.observe(el));
-</script>
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Suman · All rights reserved · <a href="blog.html">Blog</a></p>
+    <p style="margin-top:0.4rem;">PMP® · Portfolio Manager · Bengaluru, India · Built with precision, like every programme.</p>
+  </footer>
 
 </body>
 </html>
