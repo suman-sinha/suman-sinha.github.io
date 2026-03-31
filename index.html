@@ -1,1 +1,650 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Home Page</title>
+    <link rel="icon" type="image/png" href="homepage_background/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #ffffff;
+            background-image: url('homepage_background/bg.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Bar */
+        .topbar {
+            background: #d35400;
+            /* Dark Orange */
+            color: white;
+            padding: 6px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .topbar .greeting {
+            font-size: 15px;
+            font-weight: 600;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .topbar .time {
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 200;
+            opacity: 1;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #d35400, #e67e22, #d4ac0d);
+            color: white;
+            padding: 6px 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-height: 80px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .header p {
+            font-size: 13px;
+            opacity: 1;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9), 0 0 6px rgba(0, 0, 0, 0.7);
+            font-weight: 500;
+        }
+
+        /* Google Search Bar */
+        .search-container {
+            margin: 5px 0 0 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-container input {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 24px;
+            width: 100%;
+            font-size: 14px;
+            background: white;
+            color: #333;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Search Suggestions Dropdown */
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #e67e22;
+            /* Light Orange */
+            border: 1px solid #d35400;
+            /* Dark Orange */
+            border-top: none;
+            border-radius: 0 0 24px 24px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-suggestions.active {
+            display: block;
+        }
+
+        .search-suggestion-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            color: #ffffff;
+            border-bottom: 1px solid #d35400;
+            /* Dark Orange */
+            transition: background-color 0.2s ease;
+            text-align: left;
+        }
+
+        .search-suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-suggestion-item:hover,
+        .search-suggestion-item.selected {
+            background-color: #d4ac0d;
+            /* Dark Yellow */
+        }
+
+        .search-suggestion-icon {
+            margin-right: 10px;
+            color: #cccccc;
+        }
+
+        .search-container button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 24px;
+            background: #e67e22;
+            /* Light Orange */
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container button:hover {
+            background: #d4ac0d;
+            /* Dark Yellow */
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Container */
+        .container {
+            display: flex;
+            flex: 1;
+            max-width: 1200px;
+            margin: 5px auto;
+            gap: 12px;
+            width: 100%;
+            padding: 0 15px;
+            background: transparent;
+        }
+
+        /* Left Navigation */
+        .left-nav {
+            width: 250px;
+            background: rgba(230, 126, 34, 0.85);
+            /* Light Orange */
+            /* 85% opaque light orange */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .left-nav .nav-header {
+            background: #d35400;
+            /* Dark Orange */
+            color: white;
+            padding: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .left-nav ul {
+            list-style: none;
+        }
+
+        .left-nav li {
+            border-bottom: 1px solid #eee;
+        }
+
+        .left-nav li:last-child {
+            border-bottom: none;
+        }
+
+        .left-nav a {
+            display: block;
+            padding: 8px 15px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .left-nav a:hover {
+            background-color: #d4ac0d;
+            /* Dark Yellow */
+            border-left-color: #ffffff;
+            padding-left: 25px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* Main Body */
+        .main-content {
+            flex: 1;
+            background: rgba(255, 250, 240, 0.75);
+            /* Warm light tint for main body */
+            /* 75% transparent floral white */
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content h3 {
+            color: #333333;
+            margin-bottom: 6px;
+            margin-top: 15px;
+            font-size: 16px;
+            border-bottom: 2px solid #cccccc;
+            padding-bottom: 2px;
+        }
+
+        .main-content p {
+            margin-bottom: 8px;
+            color: #555555;
+            text-align: justify;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+
+        .quick-links a {
+            background: #e67e22;
+            /* Light Orange */
+            color: #333333;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 500;
+            font-size: 13px;
+            width: 170px;
+            /* Fixed width for uniform size */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .quick-links a img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+        }
+
+        .quick-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            background: #d4ac0d;
+            /* Dark Yellow */
+        }
+
+        /* Footer */
+        .footer {
+            background: #d35400;
+            /* Dark Orange */
+            color: white;
+            text-align: center;
+            padding: 8px;
+            margin-top: auto;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer p {
+            margin: 2px 0;
+            font-size: 12px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-nav {
+                width: 100%;
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+
+            .topbar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+    <script>
+        // Function to update time dynamically
+        function updateTime() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+            const timeString = now.toLocaleDateString('en-US', options);
+            const timeElement = document.getElementById('current-time');
+            if (timeElement) {
+                timeElement.textContent = timeString;
+            }
+
+            // Update greeting based on current hour
+            updateGreeting(now.getHours());
+        }
+
+        // Function to update greeting based on hour
+        function updateGreeting(hour) {
+            // Update top greeting
+            const greetingElement = document.getElementById('current-greeting');
+            let greeting = '';
+
+            if (hour < 12) {
+                greeting = "🌅 Good Morning, Suman!";
+            } else if (hour < 17) {
+                greeting = "☀️ Good Afternoon, Suman!";
+            } else {
+                greeting = "🌙 Good Evening, Suman!";
+            }
+
+            if (greetingElement) {
+                greetingElement.textContent = greeting;
+            }
+
+            // Update footer greeting
+            const footerGreetingElement = document.getElementById('footer-greeting');
+            let footerGreeting = '';
+
+            if (hour < 12) {
+                footerGreeting = "Hope you're having a productive morning!";
+            } else if (hour < 17) {
+                footerGreeting = "Keep up the great work this afternoon!";
+            } else {
+                footerGreeting = "Have a relaxing evening!";
+            }
+
+            if (footerGreetingElement) {
+                footerGreetingElement.textContent = footerGreeting;
+            }
+        }
+
+        // To be initialized after DOM load
+        let searchInput;
+        let suggestionsContainer;
+        let suggestionsTimeout;
+        let selectedSuggestionIndex = -1;
+
+        // Perform search function
+        function performSearch() {
+            const query = searchInput.value.trim();
+            if (query) {
+                window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+                suggestionsContainer.classList.remove('active');
+            }
+        }
+
+        // Fetch search suggestions from Google via PHP backend
+        async function fetchSuggestions(query) {
+            if (query.length < 2) {
+                suggestionsContainer.classList.remove('active');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/search-suggestions.php?q=${encodeURIComponent(query)}`);
+                const suggestions = await response.json();
+
+                if (suggestions && suggestions.length > 0) {
+                    displaySuggestions(suggestions);
+                } else {
+                    suggestionsContainer.classList.remove('active');
+                }
+            } catch (error) {
+                console.error('Error fetching suggestions:', error);
+                suggestionsContainer.classList.remove('active');
+            }
+        }
+
+        function displaySuggestions(suggestions) {
+            suggestionsContainer.innerHTML = '';
+            selectedSuggestionIndex = -1;
+
+            suggestions.forEach((suggestion, index) => {
+                const item = document.createElement('div');
+                item.className = 'search-suggestion-item';
+                item.innerHTML = `<span class="search-suggestion-icon">🔍</span>${suggestion}`;
+
+                item.addEventListener('click', () => {
+                    searchInput.value = suggestion;
+                    suggestionsContainer.classList.remove('active');
+                    performSearch();
+                });
+
+                item.addEventListener('mouseover', () => {
+                    document.querySelectorAll('.search-suggestion-item').forEach(el => el.classList.remove('selected'));
+                    item.classList.add('selected');
+                    selectedSuggestionIndex = index;
+                });
+
+                suggestionsContainer.appendChild(item);
+            });
+
+            suggestionsContainer.classList.add('active');
+        }
+
+        function updateSelection(items) {
+            items.forEach((item, index) => {
+                item.classList.remove('selected');
+                if (index === selectedSuggestionIndex) {
+                    item.classList.add('selected');
+                    item.scrollIntoView({ block: 'nearest' });
+                }
+            });
+        }
+
+        // Initialize search functionality when DOM is ready
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize time
+            updateTime();
+            setInterval(updateTime, 1000);
+
+            // Initialize search elements
+            searchInput = document.getElementById('search-input');
+            suggestionsContainer = document.getElementById('search-suggestions');
+
+            if (searchInput && suggestionsContainer) {
+                // Input event listener for real-time suggestions
+                searchInput.addEventListener('input', (e) => {
+                    clearTimeout(suggestionsTimeout);
+                    suggestionsTimeout = setTimeout(() => {
+                        fetchSuggestions(e.target.value);
+                    }, 300); // Debounce for 300ms
+                });
+
+                // Keyboard navigation
+                searchInput.addEventListener('keydown', (e) => {
+                    const items = document.querySelectorAll('.search-suggestion-item');
+
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        selectedSuggestionIndex = Math.min(selectedSuggestionIndex + 1, items.length - 1);
+                        updateSelection(items);
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        selectedSuggestionIndex = Math.max(selectedSuggestionIndex - 1, -1);
+                        updateSelection(items);
+                    } else if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (selectedSuggestionIndex >= 0 && items[selectedSuggestionIndex]) {
+                            items[selectedSuggestionIndex].click();
+                        } else {
+                            performSearch();
+                        }
+                    } else if (e.key === 'Escape') {
+                        suggestionsContainer.classList.remove('active');
+                    }
+                });
+
+                // Hide suggestions when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.search-wrapper') && !e.target.closest('.search-container')) {
+                        suggestionsContainer.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="greeting" id="current-greeting">
+            <!-- Greeting will be updated by JavaScript -->
+        </div>
+        <div class="time" id="current-time">
+            <!-- Time will be updated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Welcome to My Home Page</h1>
+
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Left Navigation -->
+        <div class="left-nav">
+            <div class="nav-header">Navigation</div>
+            <ul>
+                <li><a href="#home">🏠 Home</a></li>
+                <li><a href="#about">👤 About Me</a></li>
+                <li><a href="#projects">💼 Projects</a></li>
+                <li><a href="#services">🔧 Services</a></li>
+                <li><a href="#contact">📧 Contact</a></li>
+                <li><a href="#resources">📚 Resources</a></li>
+                <li><a href="info.php">ℹ️ Server Info</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Body -->
+        <div class="main-content">
+            <h2 id="home" style="color: #333333;">Welcome Home!</h2>
+            <p>
+                <b>I am what I am, where I am, because of me. I take the full responsibility for my life, my
+                    choices, and my growth.
+                    My life is what it is because of no one but me.</b>
+            </p>
+            <p>
+                What a privilege to be tired from the work you once begged the universe for...<br>
+                What a privilege to be overwhelmed by growth you used to dream about...<br>
+                What a privilege to be challenged by a life you create on purpose...<br>
+                What a privilege to outgrow things you used to settle for...
+            </p>
+
+            <h2 style="margin-top: 20px; color: #333333;">Quick Links</h2>
+
+            <h3>Essentials</h3>
+            <div class="quick-links">
+                <a href="https://www.google.com" target="_blank">🔍 Google</a>
+                <a href="https://outlook.com" target="_blank"><img src="homepage_background/outlook.png" alt="Outlook">
+                    Outlook</a>
+                <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank"><img
+                        src="homepage_background/gmail.png" alt="Gmail">
+                    Gmail</a>
+                <a href="https://www.youtube.com" target="_blank"><img src="homepage_background/youtube.png"
+                        alt="YouTube">
+                    YouTube</a>
+                <a href="https://drive.google.com/drive/my-drive" target="_blank"><img
+                        src="homepage_background/google-drive.png" alt="Google Drive">
+                    Google Drive</a>
+                <a href="https://onedrive.live.com/" target="_blank"><img src="homepage_background/onedrive.png"
+                        alt="OneDrive">
+                    OneDrive</a>
+                <a href="https://onenote.cloud.microsoft/" target="_blank">📝 OneNote Cloud</a>
+            </div>
+
+            <h3>AI</h3>
+            <div class="quick-links">
+                <a href="https://chatgpt.com" target="_blank">💬 ChatGPT</a>
+                <a href="https://grok.com" target="_blank">🤖 Grok</a>
+                <a href="https://claude.ai" target="_blank">🧠 Claude</a>
+                <a href="https://gemini.google.com/app" target="_blank"><img src="homepage_background/ai.png"
+                        alt="Google Gemini"> Gemini</a>
+                <a href="https://ollama.com/" target="_blank"><img src="homepage_background/ai.png"
+                        alt="Ollama Open Source LLM Models"> Ollama</a>
+                <a href="https://chat.deepseek.com/" target="_blank">🧠 DeepSeek</a>
+            </div>
+
+            <h3>Development</h3>
+            <div class="quick-links">
+                <a href="https://www.github.com" target="_blank">🐙 GitHub</a>
+                <a href="https://www.kaggle.com" target="_blank">📊 Kaggle</a>
+                <a href="https://colab.research.google.com" target="_blank">🔬 Google Colab</a>
+            </div>
+
+            <h3>Reading & Training</h3>
+            <div class="quick-links">
+                <a href="https://welib.st" target="_blank">📚 WeLib</a>
+                <a href="https://www.amazon.com/sendtokindle" target="_blank">📖 Send to Kindle</a>
+                <a href="https://www.udemy.com/" target="_blank"><img src="homepage_background/elearning.png"
+                        alt="Udemy">
+                    Udemy</a>
+                <a href="https://skillsbuild.org/adult-learners/explore-learning" target="_blank"><img
+                        src="homepage_background/elearning.png" alt="IBM SkillBuild">
+                    IBM SkillBuild</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2026 My Personal Home Page. All rights reserved.</p>
+        <p id="footer-greeting">
+            <!-- Footer greeting will be updated by JavaScript -->
+        </p>
+    </div>
+</body>
+
+</html>
