@@ -1,597 +1,866 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suman Kumar Sinha</title>
-    <link rel="icon" type="image/png" href="homepage_background/favicon.png">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.4;
-            color: #ffffff;
-            background-image: url('homepage_background/bg.jpg');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Top Bar */
-        .topbar {
-            background: #d35400;
-            /* Dark Orange */
-            color: white;
-            padding: 6px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .topbar .greeting {
-            font-size: 15px;
-            font-weight: 600;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-        }
-
-        .topbar .time {
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 200;
-            opacity: 1;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #d35400, #e67e22, #d4ac0d);
-            color: white;
-            padding: 6px 20px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            min-height: 80px;
-        }
-
-        .header h1 {
-            font-size: 28px;
-            margin-bottom: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.6);
-        }
-
-        .header p {
-            font-size: 13px;
-            opacity: 1;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9), 0 0 6px rgba(0, 0, 0, 0.7);
-            font-weight: 500;
-        }
-
-        /* Google Search Bar */
-        .search-container {
-            margin: 5px 0 0 0;
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .search-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .search-container input {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 24px;
-            width: 100%;
-            font-size: 14px;
-            background: white;
-            color: #333;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .search-container input:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Search Suggestions Dropdown */
-        .search-suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #e67e22;
-            /* Light Orange */
-            border: 1px solid #d35400;
-            /* Dark Orange */
-            border-top: none;
-            border-radius: 0 0 24px 24px;
-            max-height: 300px;
-            overflow-y: auto;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .search-suggestions.active {
-            display: block;
-        }
-
-        .search-suggestion-item {
-            padding: 12px 20px;
-            cursor: pointer;
-            color: #ffffff;
-            border-bottom: 1px solid #d35400;
-            /* Dark Orange */
-            transition: background-color 0.2s ease;
-            text-align: left;
-        }
-
-        .search-suggestion-item:last-child {
-            border-bottom: none;
-        }
-
-        .search-suggestion-item:hover,
-        .search-suggestion-item.selected {
-            background-color: #d4ac0d;
-            /* Dark Yellow */
-        }
-
-        .search-suggestion-icon {
-            margin-right: 10px;
-            color: #cccccc;
-        }
-
-        .search-container button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 24px;
-            background: #e67e22;
-            /* Light Orange */
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .search-container button:hover {
-            background: #d4ac0d;
-            /* Dark Yellow */
-            color: white;
-            transform: scale(1.05);
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Container */
-        .container {
-            display: flex;
-            flex: 1;
-            max-width: 1200px;
-            margin: 5px auto;
-            gap: 12px;
-            width: 100%;
-            padding: 0 15px;
-            background: transparent;
-        }
-
-        /* Left Navigation */
-        .left-nav {
-            width: 250px;
-            background: rgba(230, 126, 34, 0.85);
-            /* Light Orange */
-            /* 85% opaque light orange */
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .left-nav .nav-header {
-            background: #d35400;
-            /* Dark Orange */
-            color: white;
-            padding: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-        }
-
-        .left-nav ul {
-            list-style: none;
-        }
-
-        .left-nav li {
-            border-bottom: 1px solid #eee;
-        }
-
-        .left-nav li:last-child {
-            border-bottom: none;
-        }
-
-        .left-nav a {
-            display: block;
-            padding: 8px 15px;
-            color: #ffffff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
-        }
-
-        .left-nav a:hover {
-            background-color: #d4ac0d;
-            /* Dark Yellow */
-            border-left-color: #ffffff;
-            padding-left: 25px;
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        /* Main Body */
-        .main-content {
-            flex: 1;
-            background: rgba(255, 250, 240, 0.75);
-            /* Warm light tint for main body */
-            /* 75% transparent floral white */
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .main-content h3 {
-            color: #333333;
-            margin-bottom: 6px;
-            margin-top: 15px;
-            font-size: 16px;
-            border-bottom: 2px solid #cccccc;
-            padding-bottom: 2px;
-        }
-
-        .main-content p {
-            margin-bottom: 8px;
-            color: #555555;
-            text-align: justify;
-        }
-
-        .quick-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 8px;
-            margin-bottom: 15px;
-        }
-
-        .quick-links a {
-            background: #e67e22;
-            /* Light Orange */
-            color: #333333;
-            padding: 10px;
-            border-radius: 6px;
-            text-decoration: none;
-            text-align: center;
-            font-weight: 500;
-            font-size: 13px;
-            width: 170px;
-            /* Fixed width for uniform size */
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .quick-links a img {
-            width: 18px;
-            height: 18px;
-            object-fit: contain;
-        }
-
-        .quick-links a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-            background: #d4ac0d;
-            /* Dark Yellow */
-        }
-
-        /* Footer */
-        .footer {
-            background: #d35400;
-            /* Dark Orange */
-            color: white;
-            text-align: center;
-            padding: 8px;
-            margin-top: auto;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer p {
-            margin: 2px 0;
-            font-size: 12px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .left-nav {
-                width: 100%;
-            }
-
-            .header h1 {
-                font-size: 32px;
-            }
-
-            .topbar {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-        }
-    </style>
-    <script>
-        // Function to update time dynamically
-        function updateTime() {
-            const now = new Date();
-            const options = {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: true
-            };
-            const timeString = now.toLocaleDateString('en-US', options);
-            const timeElement = document.getElementById('current-time');
-            if (timeElement) {
-                timeElement.textContent = timeString;
-            }
-
-            // Update greeting based on current hour
-            updateGreeting(now.getHours());
-        }
-
-        // Function to update greeting based on hour
-        function updateGreeting(hour) {
-            // Update top greeting
-            const greetingElement = document.getElementById('current-greeting');
-            let greeting = '';
-
-            if (hour < 12) {
-                greeting = "🌅 Good Morning!";
-            } else if (hour < 17) {
-                greeting = "☀️ Good Afternoon!";
-            } else {
-                greeting = "🌙 Good Evening!";
-            }
-
-            if (greetingElement) {
-                greetingElement.textContent = greeting;
-            }
-
-            // Update footer greeting
-            const footerGreetingElement = document.getElementById('footer-greeting');
-            let footerGreeting = '';
-
-            if (hour < 12) {
-                footerGreeting = "Hope you're having a productive morning!";
-            } else if (hour < 17) {
-                footerGreeting = "Keep up the great work this afternoon!";
-            } else {
-                footerGreeting = "Have a relaxing evening!";
-            }
-
-            if (footerGreetingElement) {
-                footerGreetingElement.textContent = footerGreeting;
-            }
-        }
-
-        // To be initialized after DOM load
-        let searchInput;
-        let suggestionsContainer;
-        let suggestionsTimeout;
-        let selectedSuggestionIndex = -1;
-
-        // Perform search function
-        function performSearch() {
-            const query = searchInput.value.trim();
-            if (query) {
-                window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
-                suggestionsContainer.classList.remove('active');
-            }
-        }
-
-        // Fetch search suggestions from Google via PHP backend
-        async function fetchSuggestions(query) {
-            if (query.length < 2) {
-                suggestionsContainer.classList.remove('active');
-                return;
-            }
-
-            try {
-                const response = await fetch(`/search-suggestions.php?q=${encodeURIComponent(query)}`);
-                const suggestions = await response.json();
-
-                if (suggestions && suggestions.length > 0) {
-                    displaySuggestions(suggestions);
-                } else {
-                    suggestionsContainer.classList.remove('active');
-                }
-            } catch (error) {
-                console.error('Error fetching suggestions:', error);
-                suggestionsContainer.classList.remove('active');
-            }
-        }
-
-        function displaySuggestions(suggestions) {
-            suggestionsContainer.innerHTML = '';
-            selectedSuggestionIndex = -1;
-
-            suggestions.forEach((suggestion, index) => {
-                const item = document.createElement('div');
-                item.className = 'search-suggestion-item';
-                item.innerHTML = `<span class="search-suggestion-icon">🔍</span>${suggestion}`;
-
-                item.addEventListener('click', () => {
-                    searchInput.value = suggestion;
-                    suggestionsContainer.classList.remove('active');
-                    performSearch();
-                });
-
-                item.addEventListener('mouseover', () => {
-                    document.querySelectorAll('.search-suggestion-item').forEach(el => el.classList.remove('selected'));
-                    item.classList.add('selected');
-                    selectedSuggestionIndex = index;
-                });
-
-                suggestionsContainer.appendChild(item);
-            });
-
-            suggestionsContainer.classList.add('active');
-        }
-
-        function updateSelection(items) {
-            items.forEach((item, index) => {
-                item.classList.remove('selected');
-                if (index === selectedSuggestionIndex) {
-                    item.classList.add('selected');
-                    item.scrollIntoView({ block: 'nearest' });
-                }
-            });
-        }
-
-        // Initialize search functionality when DOM is ready
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize time
-            updateTime();
-            setInterval(updateTime, 1000);
-
-            // Initialize search elements
-            searchInput = document.getElementById('search-input');
-            suggestionsContainer = document.getElementById('search-suggestions');
-
-            if (searchInput && suggestionsContainer) {
-                // Input event listener for real-time suggestions
-                searchInput.addEventListener('input', (e) => {
-                    clearTimeout(suggestionsTimeout);
-                    suggestionsTimeout = setTimeout(() => {
-                        fetchSuggestions(e.target.value);
-                    }, 300); // Debounce for 300ms
-                });
-
-                // Keyboard navigation
-                searchInput.addEventListener('keydown', (e) => {
-                    const items = document.querySelectorAll('.search-suggestion-item');
-
-                    if (e.key === 'ArrowDown') {
-                        e.preventDefault();
-                        selectedSuggestionIndex = Math.min(selectedSuggestionIndex + 1, items.length - 1);
-                        updateSelection(items);
-                    } else if (e.key === 'ArrowUp') {
-                        e.preventDefault();
-                        selectedSuggestionIndex = Math.max(selectedSuggestionIndex - 1, -1);
-                        updateSelection(items);
-                    } else if (e.key === 'Enter') {
-                        e.preventDefault();
-                        if (selectedSuggestionIndex >= 0 && items[selectedSuggestionIndex]) {
-                            items[selectedSuggestionIndex].click();
-                        } else {
-                            performSearch();
-                        }
-                    } else if (e.key === 'Escape') {
-                        suggestionsContainer.classList.remove('active');
-                    }
-                });
-
-                // Hide suggestions when clicking outside
-                document.addEventListener('click', (e) => {
-                    if (!e.target.closest('.search-wrapper') && !e.target.closest('.search-container')) {
-                        suggestionsContainer.classList.remove('active');
-                    }
-                });
-            }
-        });
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Suman — Portfolio Manager & PMO Leader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #0f0e0c;
+      --paper:    #f5f1ea;
+      --cream:    #ede8de;
+      --gold:     #b8963e;
+      --gold-lt:  #d4b06a;
+      --rust:     #8c4a2f;
+      --slate:    #4a5568;
+      --muted:    #9e9a93;
+      --rule:     rgba(15,14,12,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Noise grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.55;
+    }
+
+    /* ── Typography helpers ── */
+    .mono  { font-family: 'DM Mono', monospace; font-weight: 300; }
+    .syne  { font-family: 'Syne', sans-serif; }
+    .italic { font-style: italic; }
+
+    /* ── Rule / divider ── */
+    .rule {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 2.5rem clamp(1.5rem, 6vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Large watermark number */
+    #hero::after {
+      content: '15';
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(14rem, 30vw, 28rem);
+      font-weight: 800;
+      color: rgba(184,150,62,0.07);
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-top: 0.5rem;
+    }
+
+    .site-id {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .hero-center {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 0 2rem;
+    }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.1s;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.4rem, 8vw, 7.5rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      max-width: 14ch;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.25s;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--rust);
+    }
+
+    .hero-tagline {
+      margin-top: 2rem;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--slate);
+      max-width: 52ch;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+
+    .hero-cta-row {
+      margin-top: 2.8rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.55s;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.75rem 1.6rem;
+      border: 1px solid currentColor;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .btn-primary:hover { background: var(--gold); border-color: var(--gold); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+    }
+    .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.7s;
+    }
+
+    .scroll-hint {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .scroll-line {
+      width: 36px;
+      height: 1px;
+      background: var(--muted);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .year-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ══════════════════════════════
+       STATS BAR
+    ══════════════════════════════ */
+    #stats {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 2.2rem clamp(1.5rem, 6vw, 6rem);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold-lt);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(245,241,234,0.5);
+      margin-top: 0.3rem;
+    }
+
+    /* ══════════════════════════════
+       SECTION COMMONS
+    ══════════════════════════════ */
+    section {
+      padding: 5rem clamp(1.5rem, 6vw, 6rem);
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 3rem;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 300;
+      line-height: 1.15;
+      max-width: 24ch;
+      margin-bottom: 1.8rem;
+    }
+
+    h2 em { font-style: italic; color: var(--rust); }
+
+    /* ══════════════════════════════
+       EXPERTISE
+    ══════════════════════════════ */
+    #expertise {
+      background: var(--cream);
+    }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0;
+      margin-top: 1rem;
+      border: 1px solid var(--rule);
+    }
+
+    .expertise-card {
+      padding: 2rem 1.8rem;
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .expertise-card:hover { background: var(--paper); }
+
+    .expertise-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.35s ease;
+    }
+    .expertise-card:hover::before { height: 100%; }
+
+    .card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.6rem;
+    }
+
+    .card-body {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--slate);
+      line-height: 1.65;
+    }
+
+    /* ══════════════════════════════
+       CAREER TIMELINE
+    ══════════════════════════════ */
+    #career {
+      background: var(--paper);
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 1rem;
+      padding-left: 1.8rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.4rem;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .tl-item {
+      position: relative;
+      padding: 0 0 3rem 2.5rem;
+      opacity: 0;
+      transform: translateX(-12px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .tl-item.visible { opacity: 1; transform: translateX(0); }
+
+    .tl-dot {
+      position: absolute;
+      left: -0.42rem;
+      top: 0.38rem;
+      width: 0.85rem;
+      height: 0.85rem;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 2px solid var(--gold);
+      transition: background 0.2s;
+    }
+    .tl-item:hover .tl-dot { background: var(--gold); }
+
+    .tl-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .tl-role {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+    }
+
+    .tl-org {
+      font-size: 1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--rust);
+      margin-bottom: 0.7rem;
+    }
+
+    .tl-desc {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--slate);
+      line-height: 1.7;
+      max-width: 60ch;
+    }
+
+    /* ══════════════════════════════
+       INDUSTRIES
+    ══════════════════════════════ */
+    #industries {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    #industries .section-label { color: var(--gold-lt); }
+
+    .industry-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-top: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .industry-pill {
+      flex: 1 1 calc(50% - 0px);
+      padding: 2.2rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: background 0.3s;
+    }
+    .industry-pill:hover { background: rgba(184,150,62,0.1); }
+
+    .ind-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(184,150,62,0.2);
+      line-height: 1;
+      position: absolute;
+      right: 1rem;
+      top: 0.8rem;
+    }
+
+    .ind-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .ind-org {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: rgba(245,241,234,0.45);
+      margin-top: 0.3rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ══════════════════════════════
+       DIFFERENTIATORS
+    ══════════════════════════════ */
+    #differentiators {
+      background: var(--cream);
+    }
+
+    .diff-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .diff-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .diff-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2rem;
+      text-align: right;
+    }
+
+    .diff-text strong {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .diff-text p {
+      font-size: 0.93rem;
+      font-weight: 300;
+      color: var(--slate);
+      line-height: 1.65;
+    }
+
+    /* ══════════════════════════════
+       CONTACT / FOOTER
+    ══════════════════════════════ */
+    #contact {
+      background: var(--paper);
+      text-align: center;
+      padding: 6rem clamp(1.5rem, 6vw, 6rem);
+    }
+
+    #contact h2 {
+      max-width: 100%;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--slate);
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      background: var(--ink);
+      color: rgba(245,241,234,0.4);
+      padding: 1.5rem clamp(1.5rem, 6vw, 6rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    footer a { color: var(--gold-lt); text-decoration: none; }
+
+    /* ══════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 1; }
+    }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      #hero::after { display: none; }
+      .industry-pill { flex: 1 1 100%; }
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Top Bar -->
-    <div class="topbar">
-        <div class="greeting" id="current-greeting">
-            <!-- Greeting will be updated by JavaScript -->
-        </div>
-        <div class="time" id="current-time">
-            <!-- Time will be updated by JavaScript -->
-        </div>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-top">
+    <span class="site-id">Suman · Portfolio</span>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#career">Career</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#contact">Connect</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="hero-center">
+    <p class="eyebrow">Portfolio Manager · PMO Leader · AI Practitioner</p>
+    <h1>Delivering<br>order from<br><em>complexity.</em></h1>
+    <p class="hero-tagline">
+      Fifteen years steering cross-industry portfolios — from aerospace supply chains to financial market infrastructure — turning regulatory pressure, transformation mandates, and competing priorities into measurable outcomes.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#career" class="btn btn-primary">View Career ↓</a>
+      <a href="#contact" class="btn btn-ghost">Connect →</a>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <span class="scroll-hint"><span class="scroll-line"></span> Scroll</span>
+    <span class="year-tag">PMP® Certified · Bengaluru, India</span>
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<div id="stats">
+  <div class="stat-item">
+    <div class="stat-num">15</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">4</div>
+    <div class="stat-label">Industries</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">0</div>
+    <div class="stat-label">Regulatory Breaches</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">∞</div>
+    <div class="stat-label">Stakeholders Managed</div>
+  </div>
+</div>
+
+<!-- ── EXPERTISE ── -->
+<section id="expertise">
+  <p class="section-label">Core Capabilities</p>
+  <h2>Where <em>structure</em> meets strategic delivery.</h2>
+
+  <div class="expertise-grid">
+    <div class="expertise-card">
+      <div class="card-icon">🗂</div>
+      <div class="card-title">Portfolio Governance</div>
+      <p class="card-body">Designing and running portfolio-level oversight frameworks — prioritisation, dependency mapping, capacity planning, and executive reporting — across simultaneous regulatory and transformation mandates.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="card-icon">🏛</div>
+      <div class="card-title">PMO Setup & Maturity</div>
+      <p class="card-body">Establishing PMOs from scratch and elevating existing functions: delivery standards, tollgate governance, risk registers, and the cadences that keep programmes honest.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="card-icon">⚖️</div>
+      <div class="card-title">Regulatory Programme Delivery</div>
+      <p class="card-body">End-to-end accountability on hard-deadline regulatory programmes. Recovered a delayed programme and delivered ahead of a Tax regulator's deadline — zero breaches across full tenure.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="card-icon">🔀</div>
+      <div class="card-title">Complex Data Migration</div>
+      <p class="card-body">Sole ownership of an LSEG data migration workstream from inception through Early Life Support — including planning, cutover, hypercare, and stakeholder sign-off.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="card-icon">💬</div>
+      <div class="card-title">Stakeholder Management</div>
+      <p class="card-body">Navigating C-suite, regulators, and delivery teams across banking, fintech, aerospace, and consulting — building trust under pressure and translating complexity into clear decisions.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">AI / LLM Literacy</div>
+      <p class="card-body">Actively upskilling in applied AI and LLM tooling — positioning portfolio and PMO practice to operate in AI-augmented delivery environments.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CAREER TIMELINE ── -->
+<section id="career">
+  <p class="section-label">Career Journey</p>
+  <h2>A track record built across <em>borders & sectors.</em></h2>
+
+  <div class="timeline" id="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Banking Transformation · Recent</div>
+      <div class="tl-role">Portfolio Manager / PMO Lead</div>
+      <div class="tl-org">Capgemini</div>
+      <p class="tl-desc">
+        Led simultaneous regulatory and transformation portfolios at peak scale. Recovered a delayed regulatory programme and delivered it ahead of a hard Tax regulator deadline. Maintained zero regulatory breaches across the entire tenure. Role concluded through organisational restructuring.
+      </p>
     </div>
 
-    <!-- Header -->
-    <div class="header">
-        <h1>Welcome</h1>
-
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Financial Markets Infrastructure</div>
+      <div class="tl-role">Programme / PMO Delivery</div>
+      <div class="tl-org">LSEG (London Stock Exchange Group)</div>
+      <p class="tl-desc">
+        Managed multiple workstreams within a wider enterprise programme. Sole end-to-end ownership of a critical data migration workstream — from initial planning through execution, cutover, and Early Life Support.
+      </p>
     </div>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Left Navigation -->
-        <div class="left-nav">
-            <div class="nav-header">Navigation</div>
-            <ul>
-                <li><a href="#home">🏠 Home</a></li>
-                <li><a href="#about">👤 About Me</a></li>
-                <li><a href="#projects">💼 Projects</a></li>
-                <li><a href="#services">🔧 Services</a></li>
-                <li><a href="#contact">📧 Contact</a></li>
-                <li><a href="#resources">📚 Resources</a></li>
-                <li><a href="info.php">ℹ️ Server Info</a></li>
-            </ul>
-        </div>
-
-        <!-- Main Body -->
-        <div class="main-content">
-            <h2 id="home" style="color: #333333;">Welcome Home!</h2>
-            <p>
-                <b>I am what I am, where I am, because of me. I take the full responsibility for my life, my
-                    choices, and my growth.
-                    My life is what it is because of no one but me.</b>
-            </p>
-            <p>
-                What a privilege to be tired from the work you once begged the universe for...<br>
-                What a privilege to be overwhelmed by growth you used to dream about...<br>
-                What a privilege to be challenged by a life you create on purpose...<br>
-                What a privilege to outgrow things you used to settle for...
-            </p>
-        </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Aerospace</div>
+      <div class="tl-role">Project / Portfolio Management</div>
+      <div class="tl-org">Honeywell</div>
+      <p class="tl-desc">
+        Cross-functional portfolio and project delivery within aerospace operations — building foundational strengths in governance, financial control, and structured delivery methodologies.
+      </p>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2026 My Personal Home Page. All rights reserved.</p>
-        <p id="footer-greeting">
-            <!-- Footer greeting will be updated by JavaScript -->
-        </p>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Enterprise Technology · Early Career</div>
+      <div class="tl-role">Project Support / Delivery</div>
+      <div class="tl-org">TCS</div>
+      <p class="tl-desc">
+        Supported SAP as a client on an intranet portal backend — building cross-functional delivery experience and a systems-thinking mindset at the start of a 15-year career.
+      </p>
     </div>
+
+  </div>
+</section>
+
+<!-- ── INDUSTRIES ── -->
+<section id="industries">
+  <p class="section-label">Industry Footprint</p>
+  <h2>Cross-industry breadth <em>as a differentiator.</em></h2>
+
+  <div class="industry-row">
+    <div class="industry-pill">
+      <span class="ind-num">01</span>
+      <div class="ind-name">Aerospace</div>
+      <div class="ind-org">Honeywell</div>
+    </div>
+    <div class="industry-pill">
+      <span class="ind-num">02</span>
+      <div class="ind-name">Financial Markets Infrastructure</div>
+      <div class="ind-org">LSEG</div>
+    </div>
+    <div class="industry-pill">
+      <span class="ind-num">03</span>
+      <div class="ind-name">Banking Transformation</div>
+      <div class="ind-org">Capgemini</div>
+    </div>
+    <div class="industry-pill">
+      <span class="ind-num">04</span>
+      <div class="ind-name">Enterprise Technology</div>
+      <div class="ind-org">TCS</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DIFFERENTIATORS ── -->
+<section id="differentiators">
+  <p class="section-label">What Sets Me Apart</p>
+  <h2>Not just delivery — <em>accountable leadership.</em></h2>
+
+  <div class="diff-list">
+    <div class="diff-item">
+      <div class="diff-num">1</div>
+      <div class="diff-text">
+        <strong>Simultaneous Portfolio Complexity</strong>
+        <p>Proven ability to hold regulatory and transformation mandates in parallel — without letting urgency on one compromise governance on the other.</p>
+      </div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-num">2</div>
+      <div class="diff-text">
+        <strong>Regulatory Recovery Under Pressure</strong>
+        <p>Took a behind-schedule regulatory programme and delivered it ahead of a hard statutory deadline — no breaches, no escalations, full sign-off.</p>
+      </div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-num">3</div>
+      <div class="diff-text">
+        <strong>End-to-End Ownership Mindset</strong>
+        <p>From PMO setup and governance design through to Early Life Support and hypercare — full lifecycle accountability rather than handover at go-live.</p>
+      </div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-num">4</div>
+      <div class="diff-text">
+        <strong>Cross-Industry Pattern Recognition</strong>
+        <p>Four distinct industries means pattern-matching across contexts — spotting governance failures early because you've seen the same shape before in a different sector.</p>
+      </div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-num">5</div>
+      <div class="diff-text">
+        <strong>Agile Fluency on a Waterfall Foundation</strong>
+        <p>A strong structured-delivery background now complemented by Agile/SAFe methodology — able to operate in, bridge, or redesign hybrid delivery environments.</p>
+      </div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-num">6</div>
+      <div class="diff-text">
+        <strong>AI-Augmented Practice</strong>
+        <p>Actively integrating LLM and AI tooling into portfolio and PMO workflows — building the skills to lead delivery in the next generation of operating models.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <p class="section-label" style="justify-content:center">Let's Connect</p>
+  <h2>Open to <em>Portfolio Manager</em> &amp; PMO Lead / Head roles.</h2>
+  <p class="contact-sub">Available for full-time opportunities across industries · Also accepting freelance engagements via Toptal</p>
+  <div class="contact-links">
+    <a href="https://www.linkedin.com/in/" target="_blank" class="btn btn-primary">LinkedIn →</a>
+    <a href="https://github.com/" target="_blank" class="btn btn-ghost">GitHub →</a>
+    <a href="mailto:" class="btn btn-ghost">Email →</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span>© 2026 Suman · All rights reserved</span>
+  <span>PMP® · Portfolio Manager · Bengaluru, India</span>
+  <span>Built with precision, like every programme.</span>
+</footer>
+
+<!-- ── SCROLL ANIMATION ── -->
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll('.tl-item').forEach(el => observer.observe(el));
+</script>
+
 </body>
-
 </html>
