@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Suman · Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
-      --bg:          #f5f1eb;
-      --bg-alt:      #ede9e1;
-      --bg-card:     #ffffff;
-      --border:      rgba(60,50,30,0.12);
-      --border-strong: rgba(60,50,30,0.22);
-      --text:        #1c1812;
-      --text-mid:    #4a4030;
-      --text-muted:  #7a6e5e;
-      --text-dim:    #a89e8e;
-      --accent:      #b5873a;
-      --accent-light:#f0e4cc;
-      --accent-glow: rgba(181,135,58,0.08);
-      --nav-bg:      rgba(245,241,235,0.94);
+      --bg: #f5f1eb;
+      --bg-alt: #ede9e1;
+      --bg-card: #ffffff;
+      --border: rgba(60, 50, 30, 0.12);
+      --border-strong: rgba(60, 50, 30, 0.22);
+      --text: #1c1812;
+      --text-mid: #4a4030;
+      --text-muted: #7a6e5e;
+      --text-dim: #a89e8e;
+      --accent: #b5873a;
+      --accent-light: #f0e4cc;
+      --accent-glow: rgba(181, 135, 58, 0.08);
+      --nav-bg: rgba(245, 241, 235, 0.94);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: var(--bg);
@@ -72,8 +84,14 @@
       transition: color 0.2s;
     }
 
-    .nav-links a:hover    { color: var(--accent); }
-    .nav-links a.blog-nav { color: var(--accent); font-weight: 500; }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a.blog-nav {
+      color: var(--accent);
+      font-weight: 500;
+    }
 
     /* ─── HERO (two-column layout) ─── */
     .hero-wrap {
@@ -88,7 +106,9 @@
     }
 
     /* LEFT */
-    .hero-left { animation: fadeUp 0.7s ease both; }
+    .hero-left {
+      animation: fadeUp 0.7s ease both;
+    }
 
     .hero-eyebrow {
       font-size: 0.7rem;
@@ -144,13 +164,20 @@
       background: var(--accent);
       color: #fff;
     }
-    .btn-primary:hover { background: #9e7230; }
+
+    .btn-primary:hover {
+      background: #9e7230;
+    }
 
     .btn-ghost {
       border: 1px solid var(--border-strong);
       color: var(--text-muted);
     }
-    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
     .hero-stats {
       margin-top: 3.5rem;
@@ -167,6 +194,7 @@
       color: var(--text);
       line-height: 1;
     }
+
     .stat-label {
       font-size: 0.7rem;
       letter-spacing: 0.1em;
@@ -264,7 +292,9 @@
       transition: transform 0.2s;
     }
 
-    .blog-sidebar-card:hover .card-arrow { transform: translateX(3px); }
+    .blog-sidebar-card:hover .card-arrow {
+      transform: translateX(3px);
+    }
 
     .sidebar-more {
       margin-top: 1rem;
@@ -280,7 +310,9 @@
       transition: opacity 0.2s;
     }
 
-    .sidebar-more a:hover { opacity: 0.7; }
+    .sidebar-more a:hover {
+      opacity: 0.7;
+    }
 
     /* ─── SHARED SECTION STYLES ─── */
     .section-wrap {
@@ -313,7 +345,10 @@
       color: var(--text);
     }
 
-    .section-heading em { font-style: italic; color: var(--accent); }
+    .section-heading em {
+      font-style: italic;
+      color: var(--accent);
+    }
 
     /* ─── CAPABILITIES ─── */
     .capabilities-grid {
@@ -330,9 +365,14 @@
       transition: background 0.2s;
     }
 
-    .cap-card:hover { background: var(--bg-alt); }
+    .cap-card:hover {
+      background: var(--bg-alt);
+    }
 
-    .cap-icon { font-size: 1.3rem; margin-bottom: 0.8rem; }
+    .cap-icon {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+    }
 
     .cap-card h3 {
       font-size: 0.85rem;
@@ -362,7 +402,9 @@
       transition: background 0.2s;
     }
 
-    .career-item:hover { background: var(--bg-alt); }
+    .career-item:hover {
+      background: var(--bg-alt);
+    }
 
     .career-badge {
       font-size: 0.65rem;
@@ -409,7 +451,9 @@
       transition: background 0.2s;
     }
 
-    .industry-card:hover { background: var(--bg-alt); }
+    .industry-card:hover {
+      background: var(--bg-alt);
+    }
 
     .ind-num {
       font-family: 'DM Serif Display', serif;
@@ -419,8 +463,16 @@
       line-height: 1;
     }
 
-    .industry-card h3 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.15rem; }
-    .industry-card p  { font-size: 0.78rem; color: var(--text-muted); }
+    .industry-card h3 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+    }
+
+    .industry-card p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
 
     /* ─── DIFFERENTIATORS ─── */
     .diff-grid {
@@ -440,7 +492,9 @@
       transition: background 0.2s;
     }
 
-    .diff-card:hover { background: var(--bg-alt); }
+    .diff-card:hover {
+      background: var(--bg-alt);
+    }
 
     .diff-num {
       font-family: 'DM Serif Display', serif;
@@ -449,8 +503,17 @@
       opacity: 0.4;
     }
 
-    .diff-card h3 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; }
-    .diff-card p  { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
+    .diff-card h3 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .diff-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
 
     /* ─── CONTACT ─── */
     .contact-note {
@@ -461,7 +524,11 @@
       line-height: 1.7;
     }
 
-    .contact-links { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .contact-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
 
     .contact-link {
       display: inline-flex;
@@ -477,7 +544,10 @@
       transition: all 0.2s;
     }
 
-    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
     /* ─── FOOTER ─── */
     footer {
@@ -490,26 +560,54 @@
       background: var(--bg-alt);
     }
 
-    footer a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: var(--accent); }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
-      .hero-wrap { grid-template-columns: 1fr; min-height: auto; }
-      .hero-right { position: static; }
+      .hero-wrap {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-right {
+        position: static;
+      }
     }
 
     @media (max-width: 640px) {
-      nav { padding: 1rem 1.5rem; }
-      .hero-wrap, .section-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .hero-wrap,
+      .section-wrap {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- NAV -->
@@ -532,7 +630,9 @@
       <p class="hero-eyebrow">Portfolio Manager · PMO Leader · AI Practitioner</p>
       <h1>Delivering order from <em>complexity.</em></h1>
       <p class="hero-sub">
-        Fifteen years steering cross-industry portfolios — from aerospace supply chains to financial market infrastructure — turning regulatory pressure, transformation mandates, and competing priorities into measurable outcomes.
+        Fifteen years steering cross-industry portfolios — from aerospace supply chains to financial market
+        infrastructure — turning regulatory pressure, transformation mandates, and competing priorities into measurable
+        outcomes.
       </p>
       <div class="hero-actions">
         <a href="#career" class="btn btn-primary">View Career ↓</a>
@@ -563,46 +663,46 @@
       <div class="sidebar-label">From the Blog</div>
 
       <!-- Blog card 1 — latest -->
-      <a href="blog-2.html" class="blog-sidebar-card">
-        <div class="card-tags">
-          <span class="card-tag">AI</span>
-          <span class="card-tag">Knowledge Mgmt</span>
-          <span class="card-tag">PMO</span>
-        </div>
-        <h4>From Forgotten Archives to Actionable Insight: How LLMs Can Transform Lessons Learned</h4>
-        <p>Why lessons learned rarely get used — and how LLMs can turn static archives into live delivery intelligence.</p>
-        <div class="card-meta">
-          <span>March 2026 · 10 min read</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- Blog card 2 -->
       <a href="blog-post.html" class="blog-sidebar-card">
         <div class="card-tags">
           <span class="card-tag">AI</span>
           <span class="card-tag">PMO</span>
-          <span class="card-tag">Delivery</span>
         </div>
         <h4>AI &amp; LLMs: What Every Programme Manager Needs to Know Now</h4>
-        <p>A practitioner's honest look at where AI is already changing how portfolios are governed and delivered.</p>
+        <p>Where AI is changing portfolio governance — and where PM judgement stays irreplaceable.</p>
         <div class="card-meta">
           <span>March 2026 · 8 min read</span>
           <span class="card-arrow">→</span>
         </div>
       </a>
 
-      <!-- Placeholder card 3 — coming soon -->
-      <div class="blog-sidebar-card" style="opacity:0.5; cursor:default; pointer-events:none;">
+      <!-- Blog card 2 -->
+      <a href="blog-2.html" class="blog-sidebar-card">
+        <div class="card-tags">
+          <span class="card-tag">AI</span>
+          <span class="card-tag">Knowledge Mgmt</span>
+        </div>
+        <h4>From Forgotten Archives to Actionable Insight: How LLMs Can Transform Lessons Learned</h4>
+        <p>How LLMs can turn static PMO archives into live delivery intelligence.</p>
+        <div class="card-meta">
+          <span>February 2026 · 10 min read</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- Blog card 3 -->
+      <a href="blog-3.html" class="blog-sidebar-card">
         <div class="card-tags">
           <span class="card-tag">Governance</span>
           <span class="card-tag">Regulatory</span>
         </div>
         <h4>Lessons from Delivering Under Regulatory Deadlines</h4>
+        <p>What actually works when the deadline is set by a regulator and missing it is not an option.</p>
         <div class="card-meta">
-          <span>Coming soon</span>
+          <span>January 2026 · 9 min read</span>
+          <span class="card-arrow">→</span>
         </div>
-      </div>
+      </a>
 
       <div class="sidebar-more">
         <a href="blog.html">All posts →</a>
@@ -621,32 +721,38 @@
       <div class="cap-card">
         <div class="cap-icon">🗂</div>
         <h3>Portfolio Governance</h3>
-        <p>Designing and running portfolio-level oversight frameworks — prioritisation, dependency mapping, capacity planning, and executive reporting — across simultaneous regulatory and transformation mandates.</p>
+        <p>Designing and running portfolio-level oversight frameworks — prioritisation, dependency mapping, capacity
+          planning, and executive reporting — across simultaneous regulatory and transformation mandates.</p>
       </div>
       <div class="cap-card">
         <div class="cap-icon">🏛</div>
         <h3>PMO Setup &amp; Maturity</h3>
-        <p>Establishing PMOs from scratch and elevating existing functions: delivery standards, tollgate governance, risk registers, and the cadences that keep programmes honest.</p>
+        <p>Establishing PMOs from scratch and elevating existing functions: delivery standards, tollgate governance,
+          risk registers, and the cadences that keep programmes honest.</p>
       </div>
       <div class="cap-card">
         <div class="cap-icon">⚖️</div>
         <h3>Regulatory Programme Delivery</h3>
-        <p>End-to-end accountability on hard-deadline regulatory programmes. Recovered a delayed programme and delivered ahead of a Tax regulator's deadline — zero breaches across full tenure.</p>
+        <p>End-to-end accountability on hard-deadline regulatory programmes. Recovered a delayed programme and delivered
+          ahead of a Tax regulator's deadline — zero breaches across full tenure.</p>
       </div>
       <div class="cap-card">
         <div class="cap-icon">🔀</div>
         <h3>Complex Data Migration</h3>
-        <p>Sole ownership of an LSEG data migration workstream from inception through Early Life Support — including planning, cutover, hypercare, and stakeholder sign-off.</p>
+        <p>Sole ownership of an LSEG data migration workstream from inception through Early Life Support — including
+          planning, cutover, hypercare, and stakeholder sign-off.</p>
       </div>
       <div class="cap-card">
         <div class="cap-icon">💬</div>
         <h3>Stakeholder Management</h3>
-        <p>Navigating C-suite, regulators, and delivery teams across banking, fintech, aerospace, and consulting — building trust under pressure and translating complexity into clear decisions.</p>
+        <p>Navigating C-suite, regulators, and delivery teams across banking, fintech, aerospace, and consulting —
+          building trust under pressure and translating complexity into clear decisions.</p>
       </div>
       <div class="cap-card">
         <div class="cap-icon">🤖</div>
         <h3>AI / LLM Literacy</h3>
-        <p>Actively upskilling in applied AI and LLM tooling — positioning portfolio and PMO practice to operate in AI-augmented delivery environments.</p>
+        <p>Actively upskilling in applied AI and LLM tooling — positioning portfolio and PMO practice to operate in
+          AI-augmented delivery environments.</p>
       </div>
     </div>
   </div>
@@ -660,27 +766,32 @@
     <div class="career-list">
       <div class="career-item">
         <p class="career-badge">Banking Transformation · Recent</p>
-        <h3>Portfolio Manager</h3>
+        <h3>Portfolio Manager / PMO Lead</h3>
         <p class="career-company">Capgemini</p>
-        <p>Led simultaneous regulatory and transformation portfolios at peak scale. Recovered a delayed regulatory programme and delivered it ahead of a hard Tax regulator deadline. Maintained zero regulatory breaches across the entire tenure. Role concluded through organisational restructuring.</p>
+        <p>Led simultaneous regulatory and transformation portfolios at peak scale. Recovered a delayed regulatory
+          programme and delivered it ahead of a hard Tax regulator deadline. Maintained zero regulatory breaches across
+          the entire tenure. Role concluded through organisational restructuring.</p>
       </div>
       <div class="career-item">
         <p class="career-badge">Financial Markets Infrastructure</p>
         <h3>Programme / PMO Delivery</h3>
         <p class="career-company">LSEG (London Stock Exchange Group)</p>
-        <p>Managed multiple workstreams within a wider enterprise programme. Sole end-to-end ownership of a critical data migration workstream — from initial planning through execution, cutover, and Early Life Support.</p>
+        <p>Managed multiple workstreams within a wider enterprise programme. Sole end-to-end ownership of a critical
+          data migration workstream — from initial planning through execution, cutover, and Early Life Support.</p>
       </div>
       <div class="career-item">
         <p class="career-badge">Aerospace</p>
-        <h3>PMO Governance</h3>
+        <h3>Project / Portfolio Management</h3>
         <p class="career-company">Honeywell</p>
-        <p>Cross-functional portfolio and project delivery within aerospace operations — building foundational strengths in governance, financial control, and structured delivery methodologies.</p>
+        <p>Cross-functional portfolio and project delivery within aerospace operations — building foundational strengths
+          in governance, financial control, and structured delivery methodologies.</p>
       </div>
       <div class="career-item">
         <p class="career-badge">Enterprise Technology · Early Career</p>
-        <h3>Process Leadership</h3>
+        <h3>Project Support / Delivery</h3>
         <p class="career-company">TCS</p>
-        <p>Supported the client on an intranet portal backend — building cross-functional delivery experience and a systems-thinking mindset at the start of a 15-year career.</p>
+        <p>Supported SAP as a client on an intranet portal backend — building cross-functional delivery experience and a
+          systems-thinking mindset at the start of a 15-year career.</p>
       </div>
     </div>
   </div>
@@ -694,19 +805,31 @@
     <div class="industry-grid">
       <div class="industry-card">
         <div class="ind-num">01</div>
-        <div><h3>Aerospace</h3><p>Honeywell</p></div>
+        <div>
+          <h3>Aerospace</h3>
+          <p>Honeywell</p>
+        </div>
       </div>
       <div class="industry-card">
         <div class="ind-num">02</div>
-        <div><h3>Financial Markets Infrastructure</h3><p>LSEG</p></div>
+        <div>
+          <h3>Financial Markets Infrastructure</h3>
+          <p>LSEG</p>
+        </div>
       </div>
       <div class="industry-card">
         <div class="ind-num">03</div>
-        <div><h3>Banking Transformation</h3><p>Capgemini</p></div>
+        <div>
+          <h3>Banking Transformation</h3>
+          <p>Capgemini</p>
+        </div>
       </div>
       <div class="industry-card">
         <div class="ind-num">04</div>
-        <div><h3>Enterprise Technology</h3><p>TCS</p></div>
+        <div>
+          <h3>Enterprise Technology</h3>
+          <p>TCS</p>
+        </div>
       </div>
     </div>
   </div>
@@ -722,42 +845,48 @@
         <div class="diff-num">1</div>
         <div>
           <h3>Simultaneous Portfolio Complexity</h3>
-          <p>Proven ability to hold regulatory and transformation mandates in parallel — without letting urgency on one compromise governance on the other.</p>
+          <p>Proven ability to hold regulatory and transformation mandates in parallel — without letting urgency on one
+            compromise governance on the other.</p>
         </div>
       </div>
       <div class="diff-card">
         <div class="diff-num">2</div>
         <div>
           <h3>Regulatory Recovery Under Pressure</h3>
-          <p>Took a behind-schedule regulatory programme and delivered it ahead of a hard statutory deadline — no breaches, no escalations, full sign-off.</p>
+          <p>Took a behind-schedule regulatory programme and delivered it ahead of a hard statutory deadline — no
+            breaches, no escalations, full sign-off.</p>
         </div>
       </div>
       <div class="diff-card">
         <div class="diff-num">3</div>
         <div>
           <h3>End-to-End Ownership Mindset</h3>
-          <p>From PMO setup and governance design through to Early Life Support and hypercare — full lifecycle accountability rather than handover at go-live.</p>
+          <p>From PMO setup and governance design through to Early Life Support and hypercare — full lifecycle
+            accountability rather than handover at go-live.</p>
         </div>
       </div>
       <div class="diff-card">
         <div class="diff-num">4</div>
         <div>
           <h3>Cross-Industry Pattern Recognition</h3>
-          <p>Four distinct industries means pattern-matching across contexts — spotting governance failures early because you've seen the same shape before in a different sector.</p>
+          <p>Four distinct industries means pattern-matching across contexts — spotting governance failures early
+            because you've seen the same shape before in a different sector.</p>
         </div>
       </div>
       <div class="diff-card">
         <div class="diff-num">5</div>
         <div>
           <h3>Agile Fluency on a Waterfall Foundation</h3>
-          <p>A strong structured-delivery background now complemented by Agile/SAFe methodology — able to operate in, bridge, or redesign hybrid delivery environments.</p>
+          <p>A strong structured-delivery background now complemented by Agile/SAFe methodology — able to operate in,
+            bridge, or redesign hybrid delivery environments.</p>
         </div>
       </div>
       <div class="diff-card">
         <div class="diff-num">6</div>
         <div>
           <h3>AI-Augmented Practice</h3>
-          <p>Actively integrating LLM and AI tooling into portfolio and PMO workflows — building the skills to lead delivery in the next generation of operating models.</p>
+          <p>Actively integrating LLM and AI tooling into portfolio and PMO workflows — building the skills to lead
+            delivery in the next generation of operating models.</p>
         </div>
       </div>
     </div>
@@ -782,8 +911,10 @@
   <!-- FOOTER -->
   <footer>
     <p>© 2026 Suman · All rights reserved · <a href="blog.html">Blog</a></p>
-    <p style="margin-top:0.35rem;">PMP® · Portfolio Manager · Bengaluru, India · Built with precision, like every programme.</p>
+    <p style="margin-top:0.35rem;">PMP® · Portfolio Manager · Bengaluru, India · Built with precision, like every
+      programme.</p>
   </footer>
 
 </body>
+
 </html>

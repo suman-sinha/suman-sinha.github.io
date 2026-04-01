@@ -1,138 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog · Suman Sinha</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
-      --bg:           #f5f1eb;
-      --bg-alt:       #ede9e1;
-      --bg-card:      #ffffff;
-      --border:       rgba(60,50,30,0.12);
-      --border-strong:rgba(60,50,30,0.22);
-      --text:         #1c1812;
-      --text-mid:     #4a4030;
-      --text-muted:   #7a6e5e;
-      --text-dim:     #a89e8e;
-      --accent:       #b5873a;
+      --bg: #f5f1eb;
+      --bg-alt: #ede9e1;
+      --bg-card: #ffffff;
+      --border: rgba(60, 50, 30, 0.12);
+      --border-strong: rgba(60, 50, 30, 0.22);
+      --text: #1c1812;
+      --text-mid: #4a4030;
+      --text-muted: #7a6e5e;
+      --text-dim: #a89e8e;
+      --accent: #b5873a;
       --accent-light: #f0e4cc;
-      --accent-glow:  rgba(181,135,58,0.07);
-      --nav-bg:       rgba(245,241,235,0.94);
+      --accent-glow: rgba(181, 135, 58, 0.07);
+      --nav-bg: rgba(245, 241, 235, 0.94);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      background: var(--bg); color: var(--text);
-      font-family: 'DM Sans', sans-serif; font-weight: 300;
-      line-height: 1.7; -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
     nav {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.1rem 3rem; background: var(--nav-bg);
-      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3rem;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
-    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text); text-decoration: none; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.13em; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover  { color: var(--accent); }
-    .nav-links a.active { color: var(--accent); font-weight: 500; }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+      font-weight: 500;
+    }
 
     .page-header {
-      max-width: 860px; margin: 0 auto;
+      max-width: 860px;
+      margin: 0 auto;
       padding: 4rem 3rem 2.5rem;
       animation: fadeUp 0.7s ease both;
     }
-    .page-header .eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
-    .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; line-height: 1.1; color: var(--text); margin-bottom: 0.8rem; }
-    .page-header h1 em { font-style: italic; color: var(--accent); }
-    .page-header p { font-size: 0.95rem; color: var(--text-muted); max-width: 520px; line-height: 1.7; }
+
+    .page-header .eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .page-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+
+    .page-header h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .page-header p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.7;
+    }
 
     .post-list {
-      max-width: 860px; margin: 0 auto;
+      max-width: 860px;
+      margin: 0 auto;
       padding: 1rem 3rem 6rem;
       animation: fadeUp 0.7s 0.1s ease both;
     }
 
     /* featured card */
     .post-card-featured {
-      display: block; text-decoration: none;
-      background: var(--bg-card); border: 1px solid var(--border);
-      padding: 2.4rem 2.5rem; margin-bottom: 1px;
+      display: block;
+      text-decoration: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2.4rem 2.5rem;
+      margin-bottom: 1px;
       transition: border-color 0.2s, background 0.2s;
     }
-    .post-card-featured:hover { border-color: var(--accent); background: var(--accent-glow); }
+
+    .post-card-featured:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
 
     .featured-badge {
-      display: inline-block; font-size: 0.6rem; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--accent);
-      background: var(--accent-light); padding: 0.15rem 0.55rem; margin-bottom: 1rem;
+      display: inline-block;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 0.15rem 0.55rem;
+      margin-bottom: 1rem;
     }
 
     .post-card-featured h2 {
-      font-family: 'DM Serif Display', serif; font-size: 1.55rem;
-      font-weight: 400; color: var(--text); line-height: 1.18; margin-bottom: 0.8rem;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.18;
+      margin-bottom: 0.8rem;
     }
-    .post-card-featured p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.72; max-width: 600px; margin-bottom: 1.2rem; }
+
+    .post-card-featured p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.72;
+      max-width: 600px;
+      margin-bottom: 1.2rem;
+    }
 
     /* standard card */
     .post-card {
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 1.5rem; align-items: center;
-      background: var(--bg-card); border: 1px solid var(--border);
-      padding: 1.8rem 2.5rem; margin-bottom: 1px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.8rem 2.5rem;
+      margin-bottom: 1px;
       text-decoration: none;
       transition: border-color 0.2s, background 0.2s;
     }
-    .post-card:hover { border-color: var(--accent); background: var(--accent-glow); }
-    .post-card h2 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; font-weight: 400; color: var(--text); line-height: 1.25; margin-bottom: 0.4rem; }
-    .post-card p  { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; }
+
+    .post-card:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .post-card h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 0.4rem;
+    }
+
+    .post-card p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
 
     /* coming soon card */
     .post-card-soon {
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 1.5rem; align-items: center;
-      background: var(--bg-alt); border: 1px solid var(--border);
-      padding: 1.6rem 2.5rem; margin-bottom: 1px; opacity: 0.6;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 1.6rem 2.5rem;
+      margin-bottom: 1px;
+      opacity: 0.6;
     }
-    .post-card-soon h2 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--text-muted); line-height: 1.25; margin-bottom: 0.3rem; }
-    .post-card-soon p  { font-size: 0.83rem; color: var(--text-dim); line-height: 1.6; }
-    .soon-badge { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); border: 1px solid var(--border-strong); padding: 0.2rem 0.6rem; white-space: nowrap; }
+
+    .post-card-soon h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.25;
+      margin-bottom: 0.3rem;
+    }
+
+    .post-card-soon p {
+      font-size: 0.83rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .soon-badge {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border: 1px solid var(--border-strong);
+      padding: 0.2rem 0.6rem;
+      white-space: nowrap;
+    }
 
     /* shared */
-    .post-meta-row { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
-    .p-tag { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 0.15rem 0.5rem; border-radius: 2px; }
-    .p-date { font-size: 0.72rem; color: var(--text-dim); }
-    .p-read { font-size: 0.72rem; color: var(--text-dim); }
-    .post-arrow { font-size: 1.2rem; color: var(--accent); opacity: 0.4; transition: opacity 0.2s, transform 0.2s; }
+    .post-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+
+    .p-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    .p-date {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    .p-read {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    .post-arrow {
+      font-size: 1.2rem;
+      color: var(--accent);
+      opacity: 0.4;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
     .post-card:hover .post-arrow,
-    .post-card-featured:hover .post-arrow { opacity: 1; transform: translateX(3px); }
+    .post-card-featured:hover .post-arrow {
+      opacity: 1;
+      transform: translateX(3px);
+    }
 
     footer {
-      text-align: center; padding: 2.2rem 3rem;
+      text-align: center;
+      padding: 2.2rem 3rem;
       border-top: 1px solid var(--border);
-      font-size: 0.73rem; color: var(--text-dim); letter-spacing: 0.05em;
+      font-size: 0.73rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
       background: var(--bg-alt);
     }
-    footer a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: var(--accent); }
 
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     @media (max-width: 640px) {
-      nav { padding: 1rem 1.5rem; }
-      .page-header, .post-list { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .post-card, .post-card-soon { grid-template-columns: 1fr; }
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .page-header,
+      .post-list {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .post-card,
+      .post-card-soon {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <nav>
@@ -148,58 +359,66 @@
   <header class="page-header">
     <p class="eyebrow">Perspectives · PMO · Delivery · AI</p>
     <h1>Writing on <em>delivery, governance,</em> and what's changing.</h1>
-    <p>Practical observations from fifteen years across aerospace, financial markets, banking, and enterprise technology — written for programme managers and PMO leaders navigating a shifting landscape.</p>
+    <p>Practical observations from fifteen years across aerospace, financial markets, banking, and enterprise technology
+      — written for programme managers and PMO leaders navigating a shifting landscape.</p>
   </header>
 
   <div class="post-list">
 
-    <!-- POST 2 — featured (most recent) -->
-    <a href="blog-2.html" class="post-card-featured">
+    <!-- POST 3 — featured (most recent) -->
+    <a href="blog-post.html" class="post-card-featured">
       <div class="featured-badge">Latest post</div>
       <div class="post-meta-row">
-        <span class="p-tag">AI</span>
-        <span class="p-tag">Knowledge Management</span>
-        <span class="p-tag">PMO</span>
+        <span class="p-tag">Governance</span>
+        <span class="p-tag">Regulatory</span>
+        <span class="p-tag">Programme Delivery</span>
         <span class="p-date">March 2026</span>
-        <span class="p-read">· 10 min read</span>
+        <span class="p-read">· 9 min read</span>
       </div>
-      <h2>From Forgotten Archives to Actionable Insight: How LLMs Can Transform Lessons Learned</h2>
-      <p>Lessons learned documents exist in almost every PMO. Almost none of them get used. The problem is not effort at the documentation stage — it is a structural failure in how knowledge is stored, retrieved, and applied under delivery pressure. LLMs change that equation in ways that are both practical and significant.</p>
+      <h2>AI &amp; LLMs: What Every Programme Manager Needs to Know Now</h2>
+      <p>A practitioner's honest look at where AI is already changing how portfolios are governed and delivered — and
+        where the PM's judgement stays irreplaceable.</p>
       <div style="display:flex; justify-content:flex-end;">
         <span class="post-arrow">→</span>
       </div>
     </a>
 
+    <!-- POST 2 -->
+    <a href="blog-2.html" class="post-card">
+      <div>
+        <div class="post-meta-row">
+          <span class="p-tag">AI</span>
+          <span class="p-tag">Knowledge Management</span>
+          <span class="p-tag">PMO</span>
+          <span class="p-date">February 2026</span>
+          <span class="p-read">· 10 min read</span>
+        </div>
+        <h2>From Forgotten Archives to Actionable Insight: How LLMs Can Transform Lessons Learned</h2>
+        <p>Lessons learned documents exist in almost every PMO. Almost none get used. LLMs can change that — turning
+          static archives into live delivery intelligence.</p>
+      </div>
+      <span class="post-arrow">→</span>
+    </a>
+
     <!-- POST 1 -->
-    <a href="blog-post.html" class="post-card">
+    <a href="blog-3.html" class="post-card">
       <div>
         <div class="post-meta-row">
           <span class="p-tag">AI</span>
           <span class="p-tag">PMO</span>
           <span class="p-tag">Delivery</span>
-          <span class="p-date">February 2026</span>
+          <span class="p-date">January 2026</span>
           <span class="p-read">· 8 min read</span>
         </div>
-        <h2>AI &amp; LLMs: What Every Programme Manager Needs to Know Now</h2>
-        <p>A practitioner's honest look at where AI is already changing how portfolios are governed and delivered — and where the PM's judgement stays irreplaceable.</p>
+        <h2>Lessons from Delivering Under Regulatory Deadlines</h2>
+        <p>A regulatory deadline is a different kind of pressure. Missing it carries consequences that go well beyond a
+          project retrospective. These are the honest observations from the delivery floor — what actually works when
+          the deadline is non-negotiable and the margin for error is zero.</p>
       </div>
       <span class="post-arrow">→</span>
     </a>
 
-    <!-- COMING SOON 1 -->
-    <div class="post-card-soon">
-      <div>
-        <div class="post-meta-row">
-          <span class="p-tag">Governance</span>
-          <span class="p-tag">Regulatory</span>
-        </div>
-        <h2>Lessons from Delivering Under Regulatory Deadlines</h2>
-        <p>What a recovered programme taught me about pressure, governance, and why structure is a PM's best friend when the clock is ticking.</p>
-      </div>
-      <span class="soon-badge">Coming soon</span>
-    </div>
-
-    <!-- COMING SOON 2 -->
+    <!-- COMING SOON -->
     <div class="post-card-soon">
       <div>
         <div class="post-meta-row">
@@ -207,7 +426,8 @@
           <span class="p-tag">Career</span>
         </div>
         <h2>What Aerospace Taught Me About Banking Transformation</h2>
-        <p>Four industries, fifteen years — and the patterns that repeat across every sector once you know what to look for.</p>
+        <p>Four industries, fifteen years — and the patterns that repeat across every sector once you know what to look
+          for.</p>
       </div>
       <span class="soon-badge">Coming soon</span>
     </div>
@@ -215,9 +435,11 @@
   </div>
 
   <footer>
-    <p>© 2026 Suman · <a href="index.html">Home</a> · <a href="https://www.linkedin.com/in/sk-sinha/">LinkedIn</a> · <a href="mailto:suman.sinha@outlook.in">Email</a></p>
+    <p>© 2026 Suman · <a href="index.html">Home</a> · <a href="https://www.linkedin.com/in/sk-sinha/">LinkedIn</a> · <a
+        href="mailto:suman.sinha@outlook.in">Email</a></p>
     <p style="margin-top:0.35rem;">Built with precision, like every programme.</p>
   </footer>
 
 </body>
+
 </html>
