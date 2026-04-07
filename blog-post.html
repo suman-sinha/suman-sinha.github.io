@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q9JM29PZZJ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-  
+
     gtag('config', 'G-Q9JM29PZZJ');
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="images/favicon.png">
   <title>Blog · Suman Sinha</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
-      --bg:           #f5f1eb;
-      --bg-alt:       #ede9e1;
-      --bg-card:      #ffffff;
-      --border:       rgba(60,50,30,0.12);
-      --border-strong:rgba(60,50,30,0.22);
-      --text:         #1c1812;
-      --text-mid:     #4a4030;
-      --text-muted:   #7a6e5e;
-      --text-dim:     #a89e8e;
-      --accent:       #b5873a;
+      --bg: #f5f1eb;
+      --bg-alt: #ede9e1;
+      --bg-card: #ffffff;
+      --border: rgba(60, 50, 30, 0.12);
+      --border-strong: rgba(60, 50, 30, 0.22);
+      --text: #1c1812;
+      --text-mid: #4a4030;
+      --text-muted: #7a6e5e;
+      --text-dim: #a89e8e;
+      --accent: #b5873a;
       --accent-light: #f0e4cc;
-      --accent-glow:  rgba(181,135,58,0.07);
-      --nav-bg:       rgba(245,241,235,0.94);
+      --accent-glow: rgba(181, 135, 58, 0.07);
+      --nav-bg: rgba(245, 241, 235, 0.94);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: var(--bg);
@@ -66,7 +79,11 @@
       text-decoration: none;
     }
 
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
 
     .nav-links a {
       color: var(--text-muted);
@@ -77,8 +94,14 @@
       transition: color 0.2s;
     }
 
-    .nav-links a:hover     { color: var(--accent); }
-    .nav-links a.active    { color: var(--accent); font-weight: 500; }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+      font-weight: 500;
+    }
 
     /* ─── ARTICLE WRAPPER ─── */
     .article-wrap {
@@ -101,7 +124,10 @@
       margin-bottom: 2.5rem;
       transition: color 0.2s;
     }
-    .back-link:hover { color: var(--accent); }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
 
     /* hero */
     .article-eyebrow {
@@ -121,7 +147,10 @@
       margin-bottom: 1.6rem;
     }
 
-    .article-wrap h1 em { font-style: italic; color: var(--accent); }
+    .article-wrap h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
 
     /* meta bar */
     .article-meta {
@@ -156,7 +185,8 @@
       font-weight: 500;
     }
 
-    .meta-date, .meta-read {
+    .meta-date,
+    .meta-read {
       font-size: 0.75rem;
       color: var(--text-dim);
     }
@@ -188,7 +218,10 @@
       margin: 3rem 0 1rem;
     }
 
-    .article-body h2 em { font-style: italic; color: var(--accent); }
+    .article-body h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
 
     .article-body h3 {
       font-size: 0.72rem;
@@ -230,7 +263,9 @@
       transition: background 0.2s;
     }
 
-    .insight-card:hover { background: var(--bg-alt); }
+    .insight-card:hover {
+      background: var(--bg-alt);
+    }
 
     .insight-num {
       font-family: 'DM Serif Display', serif;
@@ -312,20 +347,41 @@
       background: var(--bg-alt);
     }
 
-    footer a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-    footer a:hover { color: var(--accent); }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (max-width: 640px) {
-      nav { padding: 1rem 1.5rem; }
-      .article-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .article-wrap {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- NAV -->
@@ -363,11 +419,16 @@
     <div class="article-body">
 
       <p>
-        There is a version of this conversation happening in every PMO right now. Someone has asked "are we using AI?" and someone else has said "we're exploring it." The exploration, however, rarely gets past the chatbot demo. Meanwhile, the actual structural shift — the one that will change how programmes are governed, reported on, and delivered — is already underway.
+        There is a version of this conversation happening in every PMO right now. Someone has asked "are we using AI?"
+        and someone else has said "we're exploring it." The exploration, however, rarely gets past the chatbot demo.
+        Meanwhile, the actual structural shift — the one that will change how programmes are governed, reported on, and
+        delivered — is already underway.
       </p>
 
       <p>
-        I've spent the past year deliberately upskilling in applied AI and LLM tooling, not as a technology exercise, but as a delivery discipline. What follows is not a breathless overview of what AI can do. It is a practitioner's honest assessment of where it changes the work — and where it does not.
+        I've spent the past year deliberately upskilling in applied AI and LLM tooling, not as a technology exercise,
+        but as a delivery discipline. What follows is not a breathless overview of what AI can do. It is a
+        practitioner's honest assessment of where it changes the work — and where it does not.
       </p>
 
       <div class="pull-quote">
@@ -377,11 +438,18 @@
       <h2>Why This Moment Is <em>Different</em></h2>
 
       <p>
-        Programme management has absorbed waves of tooling before — from desktop scheduling software to cloud-based PPM platforms to Agile collaboration suites. Each wave changed the interface without fundamentally changing the cognitive work of the PM. You still built the WBS, you still chased the risk register, you still sat in the RAG meeting deciding whether amber was really red.
+        Programme management has absorbed waves of tooling before — from desktop scheduling software to cloud-based PPM
+        platforms to Agile collaboration suites. Each wave changed the interface without fundamentally changing the
+        cognitive work of the PM. You still built the WBS, you still chased the risk register, you still sat in the RAG
+        meeting deciding whether amber was really red.
       </p>
 
       <p>
-        LLMs are different in one specific, consequential way: they operate on language at scale, and programme management is almost entirely a language-based discipline. Status reports. Steering pack commentary. Risk articulations. Stakeholder communications. Lessons learned. All of it is language. And for the first time, there is a class of tool that can meaningfully assist with that language work — not by templating it, but by reasoning through it.
+        LLMs are different in one specific, consequential way: they operate on language at scale, and programme
+        management is almost entirely a language-based discipline. Status reports. Steering pack commentary. Risk
+        articulations. Stakeholder communications. Lessons learned. All of it is language. And for the first time, there
+        is a class of tool that can meaningfully assist with that language work — not by templating it, but by reasoning
+        through it.
       </p>
 
       <h3>Where AI Is Already Changing the Work</h3>
@@ -392,7 +460,10 @@
           <div class="insight-num">01</div>
           <div>
             <h4>Status Reporting &amp; Narrative Generation</h4>
-            <p>The weekly status report is the most time-consuming low-value artefact in programme management. LLMs can draft from structured inputs — RAG status, milestone updates, risk movement — in seconds. The PM's job shifts from writing the narrative to editing it for accuracy and judgement. This alone returns hours per week per programme.</p>
+            <p>The weekly status report is the most time-consuming low-value artefact in programme management. LLMs can
+              draft from structured inputs — RAG status, milestone updates, risk movement — in seconds. The PM's job
+              shifts from writing the narrative to editing it for accuracy and judgement. This alone returns hours per
+              week per programme.</p>
           </div>
         </div>
 
@@ -400,7 +471,10 @@
           <div class="insight-num">02</div>
           <div>
             <h4>Risk &amp; Issue Analysis</h4>
-            <p>Feed a risk register into a capable LLM with the right prompt and ask it to identify interdependencies, flag underweighted risks, or draft mitigation options for the top five items. It will not replace the experienced PM's judgement, but it will surface patterns faster than a manual scan — especially across large portfolios with 50+ active risks.</p>
+            <p>Feed a risk register into a capable LLM with the right prompt and ask it to identify interdependencies,
+              flag underweighted risks, or draft mitigation options for the top five items. It will not replace the
+              experienced PM's judgement, but it will surface patterns faster than a manual scan — especially across
+              large portfolios with 50+ active risks.</p>
           </div>
         </div>
 
@@ -408,7 +482,10 @@
           <div class="insight-num">03</div>
           <div>
             <h4>Stakeholder Communication Drafting</h4>
-            <p>Escalation emails, ExCo briefing notes, regulator-facing summaries — these require careful calibration of tone, detail, and framing. LLMs are surprisingly capable here, particularly when given context about the audience and the desired outcome. The judgement of what to say remains yours; the first draft no longer needs to be.</p>
+            <p>Escalation emails, ExCo briefing notes, regulator-facing summaries — these require careful calibration of
+              tone, detail, and framing. LLMs are surprisingly capable here, particularly when given context about the
+              audience and the desired outcome. The judgement of what to say remains yours; the first draft no longer
+              needs to be.</p>
           </div>
         </div>
 
@@ -416,7 +493,10 @@
           <div class="insight-num">04</div>
           <div>
             <h4>Lessons Learned &amp; Knowledge Synthesis</h4>
-            <p>Most lessons learned exercises produce a document no one reads. LLMs can synthesise retrospective inputs, interview transcripts, and post-implementation review notes into structured, searchable insight. For PMOs managing multiple programmes, this is a meaningful step toward institutional memory that actually gets used.</p>
+            <p>Most lessons learned exercises produce a document no one reads. LLMs can synthesise retrospective inputs,
+              interview transcripts, and post-implementation review notes into structured, searchable insight. For PMOs
+              managing multiple programmes, this is a meaningful step toward institutional memory that actually gets
+              used.</p>
           </div>
         </div>
 
@@ -424,7 +504,10 @@
           <div class="insight-num">05</div>
           <div>
             <h4>Governance Framework Design</h4>
-            <p>When setting up a new PMO or redesigning governance for a programme, LLMs are useful thinking partners. Ask one to draft a RACI for a specific delivery model, critique a governance structure you've described, or generate tollgate criteria for a regulatory programme. It accelerates the thinking — the expert review is still essential, but the blank page problem is gone.</p>
+            <p>When setting up a new PMO or redesigning governance for a programme, LLMs are useful thinking partners.
+              Ask one to draft a RACI for a specific delivery model, critique a governance structure you've described,
+              or generate tollgate criteria for a regulatory programme. It accelerates the thinking — the expert review
+              is still essential, but the blank page problem is gone.</p>
           </div>
         </div>
 
@@ -435,33 +518,48 @@
       <h2>Where AI <em>Does Not</em> Replace the PM</h2>
 
       <p>
-        Being honest about this matters, because the overclaim in either direction — "AI will do everything" or "AI changes nothing" — leads to bad decisions.
+        Being honest about this matters, because the overclaim in either direction — "AI will do everything" or "AI
+        changes nothing" — leads to bad decisions.
       </p>
 
       <p>
-        AI does not replace the PM's relationship capital. When a programme is in trouble and a senior stakeholder needs to be managed through a difficult conversation, no LLM is in the room. The trust built over months of consistent delivery, honest reporting, and showing up when things are hard — that is human work and will remain so.
+        AI does not replace the PM's relationship capital. When a programme is in trouble and a senior stakeholder needs
+        to be managed through a difficult conversation, no LLM is in the room. The trust built over months of consistent
+        delivery, honest reporting, and showing up when things are hard — that is human work and will remain so.
       </p>
 
       <p>
-        AI does not replace escalation judgement. Knowing when to escalate, to whom, and in what framing is one of the highest-value skills a PM develops. It requires organisational reading, political awareness, and an understanding of what each stakeholder can hear at any given moment. An LLM can help you draft the escalation once you've decided to make it; it cannot decide for you.
+        AI does not replace escalation judgement. Knowing when to escalate, to whom, and in what framing is one of the
+        highest-value skills a PM develops. It requires organisational reading, political awareness, and an
+        understanding of what each stakeholder can hear at any given moment. An LLM can help you draft the escalation
+        once you've decided to make it; it cannot decide for you.
       </p>
 
       <p>
-        AI does not replace accountability. The PM who signs off the steering pack owns what is in it — regardless of who or what produced the first draft. As AI-assisted delivery becomes normal, the quality of the PM's review and judgement will matter more, not less.
+        AI does not replace accountability. The PM who signs off the steering pack owns what is in it — regardless of
+        who or what produced the first draft. As AI-assisted delivery becomes normal, the quality of the PM's review and
+        judgement will matter more, not less.
       </p>
 
       <div class="pull-quote">
-        "The question is not whether to use AI. It is whether your PMO has a considered, deliberate approach to how it does so — or is leaving that to chance."
+        "The question is not whether to use AI. It is whether your PMO has a considered, deliberate approach to how it
+        does so — or is leaving that to chance."
       </div>
 
       <h2>A Practitioner's Starting Point</h2>
 
       <p>
-        If you are a Programme Manager or PMO Lead wondering where to start, here is a practical sequence: begin with the artefacts you produce most frequently and find most repetitive. Status reports, meeting summaries, risk narratives. Learn to prompt well — specificity, context, and desired output format all matter significantly. Audit the output critically before it goes anywhere. Then, once you have a feel for where the tool earns its place, start thinking about where it changes your governance model.
+        If you are a Programme Manager or PMO Lead wondering where to start, here is a practical sequence: begin with
+        the artefacts you produce most frequently and find most repetitive. Status reports, meeting summaries, risk
+        narratives. Learn to prompt well — specificity, context, and desired output format all matter significantly.
+        Audit the output critically before it goes anywhere. Then, once you have a feel for where the tool earns its
+        place, start thinking about where it changes your governance model.
       </p>
 
       <p>
-        The PMOs that will be ahead in three years are not the ones that ran the most pilots. They are the ones that made considered, deliberate choices about AI integration — and built that into how they work, not as a feature, but as a capability.
+        The PMOs that will be ahead in three years are not the ones that ran the most pilots. They are the ones that
+        made considered, deliberate choices about AI integration — and built that into how they work, not as a feature,
+        but as a capability.
       </p>
 
       <p>
@@ -473,7 +571,9 @@
         <div class="bio-avatar">SS</div>
         <div class="bio-text">
           <h4>Suman Sinha · PMP®</h4>
-          <p>Portfolio Manager and PMO Leader with 15 years across aerospace, financial markets, banking, and enterprise technology. Currently upskilling in applied AI and LLM tooling as part of next-generation delivery practice. Based in Bengaluru, India.</p>
+          <p>Portfolio Manager and PMO Leader with 15 years across aerospace, financial markets, banking, and enterprise
+            technology. Currently upskilling in applied AI and LLM tooling as part of next-generation delivery practice.
+            Based in Bengaluru, India.</p>
         </div>
       </div>
 
@@ -481,5 +581,6 @@
   </div><!-- /article-wrap -->
 
   <footer>
-    <p>© 2026 Suman · <a href="index.html">Home</a> · <a href="https://www.linkedin.com/in/sk-sinha/">LinkedIn</a> · <a href="/cdn-cgi/l/email-protection#86f5f3ebe7e8a8f5efe8eee7c6e9f3f2eae9e9eda8efe8">Email</a></p>
+    <p>© 2026 Suman · <a href="index.html">Home</a> · <a href="https://www.linkedin.com/in/sk-sinha/">LinkedIn</a> · <a
+        href="/cdn-cgi/l/email-protection#86f5f3ebe7e8a8f5efe8eee7c6e9f3f2eae9e9eda8efe8">Email</a></p>
     <p style="margin-top:0.35rem;">Built with precision, like every
