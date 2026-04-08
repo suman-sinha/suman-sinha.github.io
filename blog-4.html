@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Aerospace Taught Me About Banking Transformation · Suman Sinha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f1eb;
+      --bg-alt: #ede9e1;
+      --bg-card: #ffffff;
+      --border: rgba(60, 50, 30, 0.12);
+      --border-strong: rgba(60, 50, 30, 0.22);
+      --text: #1c1812;
+      --text-mid: #4a4030;
+      --text-muted: #7a6e5e;
+      --text-dim: #a89e8e;
+      --accent: #b5873a;
+      --accent-light: #f0e4cc;
+      --accent-glow: rgba(181, 135, 58, 0.07);
+      --nav-bg: rgba(245, 241, 235, 0.94);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3rem;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .article-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    .article-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .article-wrap h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.12;
+      color: var(--text);
+      margin-bottom: 1.6rem;
+    }
+
+    .article-wrap h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+
+    .meta-author {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .author-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .meta-date,
+    .meta-read {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .article-tag {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      background: var(--accent-light);
+      border-radius: 2px;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .article-body p {
+      font-size: 1.02rem;
+      color: var(--text-mid);
+      line-height: 1.82;
+      margin-bottom: 1.6rem;
+    }
+
+    .article-body h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--text);
+      margin: 3rem 0 1rem;
+    }
+
+    .article-body h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .article-body h3 {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 2.5rem 0 0.8rem;
+    }
+
+    .pull-quote {
+      margin: 2.5rem 0;
+      padding: 1.6rem 2rem 1.6rem 1.8rem;
+      border-left: 2px solid var(--accent);
+      background: var(--accent-glow);
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* insight cards — numbered grid */
+    .insight-grid {
+      display: grid;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .insight-card {
+      background: var(--bg-card);
+      padding: 1.4rem 1.8rem;
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      transition: background 0.2s;
+    }
+
+    .insight-card:hover {
+      background: var(--bg-alt);
+    }
+
+    .insight-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      opacity: 0.5;
+      line-height: 1;
+      padding-top: 0.1rem;
+    }
+
+    .insight-card h4 {
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+
+    .insight-card p {
+      font-size: 0.85rem !important;
+      color: var(--text-muted) !important;
+      line-height: 1.65 !important;
+      margin: 0 !important;
+    }
+
+    /* two-column comparison table */
+    .compare-table {
+      margin: 2rem 0;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      overflow: hidden;
+    }
+
+    .compare-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compare-header span {
+      padding: 0.7rem 1.4rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .compare-header span:first-child {
+      border-right: 1px solid var(--border);
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .compare-row:last-child {
+      border-bottom: none;
+    }
+
+    .compare-row:hover {
+      background: var(--accent-glow);
+    }
+
+    .compare-cell {
+      padding: 0.9rem 1.4rem;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .compare-cell:first-child {
+      border-right: 1px solid var(--border);
+      color: var(--text-mid);
+    }
+
+    /* callout box */
+    .callout {
+      margin: 2rem 0;
+      padding: 1.4rem 1.8rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+    }
+
+    .callout-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .callout p {
+      font-size: 0.88rem !important;
+      color: var(--text-mid) !important;
+      line-height: 1.7 !important;
+      margin: 0 !important;
+    }
+
+    .section-rule {
+      margin: 2.5rem 0;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .author-bio {
+      margin-top: 3.5rem;
+      padding: 1.8rem 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .bio-avatar {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .bio-text h4 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .bio-text p {
+      font-size: 0.8rem !important;
+      color: var(--text-muted) !important;
+      line-height: 1.6 !important;
+      margin: 0 !important;
+    }
+
+    .post-nav {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .post-nav a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      text-decoration: none;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      flex: 1;
+      min-width: 200px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .post-nav a:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .post-nav .nav-dir {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .post-nav .nav-title {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      line-height: 1.4;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.2rem 3rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.73rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      background: var(--bg-alt);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .article-wrap {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .compare-header,
+      .compare-row {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-header span:first-child,
+      .compare-cell:first-child {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Suman Sinha</a>
+    <ul class="nav-links">
+      <li><a href="index.html#expertise">Expertise</a></li>
+      <li><a href="index.html#career">Career</a></li>
+      <li><a href="index.html#contact">Connect</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+
+    <a href="blog.html" class="back-link">← All posts</a>
+
+    <p class="article-eyebrow">Perspectives · Cross-Industry Delivery &amp; Career</p>
+
+    <h1>What Aerospace Taught Me About <em>Banking Transformation</em></h1>
+
+    <div class="article-meta">
+      <div class="meta-author">
+        <div class="author-dot">SS</div>
+        Suman Sinha · PMP®
+      </div>
+      <span class="meta-date">December 2025</span>
+      <span class="meta-read">9 min read</span>
+      <span class="article-tag">Cross-Industry</span>
+      <span class="article-tag">Career</span>
+      <span class="article-tag">Governance</span>
+    </div>
+
+    <div class="article-body">
+
+      <p>
+        When I moved from aerospace into financial markets infrastructure, the assumption from some corners was that the
+        transition would be steep. Different regulatory environment, different technology landscape, different
+        stakeholder culture, different everything. And there is truth in that — the surface-level differences between a
+        Honeywell aerospace operation and an LSEG financial markets programme are real and significant.
+      </p>
+
+      <p>
+        What surprised me, however, was how much transferred. Not in the sense of terminology or technical domain
+        knowledge — that genuinely does not cross over — but at the level of delivery fundamentals. The patterns that
+        determine whether a complex programme succeeds or fails are remarkably consistent across industries. What
+        changes is the context in which those patterns play out. What does not change is the pattern itself.
+      </p>
+
+      <p>
+        Fifteen years and four industries later — aerospace, financial markets, banking transformation, and enterprise
+        technology — that observation has only deepened. Cross-industry experience is not just a CV talking point. It is
+        a genuine cognitive asset, and understanding why requires being specific about what actually transfers and what
+        does not.
+      </p>
+
+      <div class="pull-quote">
+        "The surface differences between industries are real. But the patterns that determine whether a complex
+        programme succeeds or fails are remarkably consistent. What changes is the context. What does not change is the
+        shape of the problem."
+      </div>
+
+      <h2>What Aerospace <em>Builds Into You</em></h2>
+
+      <p>
+        Aerospace operations at the programme and portfolio level are defined by a particular kind of discipline.
+        Safety-critical environments do not tolerate ambiguity about ownership, process, or sign-off authority.
+        Everything is documented. Deviations from plan are not just noted — they are formally assessed, risk-rated, and
+        resolved through a defined change process. The culture is built around the assumption that small oversights
+        compound into large failures, because in safety-critical manufacturing and supply chains, they do.
+      </p>
+
+      <p>
+        This shapes how you think about governance in ways that are not always immediately obvious when you are inside
+        it. You begin to see governance not as an administrative overhead but as an error-correction mechanism — a set
+        of structured checkpoints that exist to catch problems before they propagate. You develop an instinct for the
+        difference between process that protects delivery and process that merely consumes time. And you learn to build
+        RAID logs, dependency maps, and escalation paths that are genuinely maintained rather than produced once and
+        filed.
+      </p>
+
+      <p>
+        You also develop a particular relationship with financial control. Aerospace programmes are capital-intensive,
+        long-cycle, and held to tight budget disciplines — earned value, cost-to-complete, variance analysis at
+        workstream level. Managing this rigorously from early in a career builds habits around financial governance that
+        translate directly into portfolio management in any industry.
+      </p>
+
+      <div class="callout">
+        <span class="callout-label">The foundational transfer</span>
+        <p>Aerospace teaches you that governance is not bureaucracy — it is discipline in service of outcomes. That
+          distinction, once internalised, changes how you design and run PMOs in every industry that follows.</p>
+      </div>
+
+      <h2>Where the <em>Patterns Repeated</em> in Banking</h2>
+
+      <p>
+        When I arrived in financial markets and banking transformation, the specific domain was new — SWIFT messaging
+        standards, regulatory capital requirements, data migration complexity, the particular stakeholder dynamics of a
+        heavily regulated sector. None of that came from aerospace. What did come across was a set of
+        pattern-recognition instincts that proved immediately useful.
+      </p>
+
+      <h3>The patterns that transferred directly</h3>
+
+      <div class="insight-grid">
+
+        <div class="insight-card">
+          <div class="insight-num">01</div>
+          <div>
+            <h4>Dependency Failures Look the Same Everywhere</h4>
+            <p>Whether it is a supplier component delivery in an aerospace supply chain or a data feed from a upstream
+              system in a financial markets migration, the failure mode is identical — a dependency slips, the
+              downstream impact is underestimated, the programme absorbs the delay silently until it can no longer do
+              so. The mitigation discipline is also identical: actively managed dependency logs, explicit ownership, and
+              early-warning triggers built into governance cadences rather than discovered in steering committee.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">02</div>
+          <div>
+            <h4>Scope Creep Has a Universal Signature</h4>
+            <p>In aerospace, scope creep typically arrives as engineering change requests — small additions that each
+              appear reasonable in isolation but cumulatively displace schedule and budget. In banking transformation,
+              it arrives as stakeholder requirements that expand during build, or as regulatory interpretations that are
+              refined after the programme has already committed to a design. The signature is the same: individually
+              justifiable additions that collectively undermine the programme. The defence is also the same: a formal
+              change process with explicit cost and schedule impact assessment, visible to the steering committee,
+              before any addition is accepted.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">03</div>
+          <div>
+            <h4>Stakeholder Resistance Follows Predictable Shapes</h4>
+            <p>Cross-functional programmes in aerospace — those touching engineering, supply chain, finance, and quality
+              simultaneously — surface a predictable pattern of functional resistance. Each function has its own
+              priorities, its own definition of success, and its own instinct to protect its domain. Banking
+              transformation programmes are structurally identical in this regard. The functions are different —
+              technology, operations, compliance, front office — but the dynamics of cross-functional friction,
+              competing priorities, and the need for deliberate stakeholder management follow the same contours.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">04</div>
+          <div>
+            <h4>Governance Cadence Determines Programme Velocity</h4>
+            <p>One of the clearest lessons from aerospace is that the rhythm of governance — how frequently decisions
+              are made, how quickly issues are escalated, how transparently blockers are surfaced — sets the pace of the
+              programme as much as the plan itself. A programme with a well-structured weekly governance cycle and a
+              clear escalation path will consistently outperform one with better resources but slower decision-making.
+              This held true in every banking and financial markets programme I subsequently worked on. Governance
+              cadence is a delivery lever, not an overhead.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">05</div>
+          <div>
+            <h4>The Last 20% Is Always the Hardest</h4>
+            <p>In aerospace programme delivery, there is a well-understood phenomenon where the final phase —
+              integration, testing, sign-off, and handover — consistently consumes a disproportionate share of time and
+              resource relative to plan. This is not a planning failure. It is a structural feature of complex delivery:
+              the final phase is where all accumulated ambiguity, unresolved dependencies, and deferred decisions
+              surface simultaneously. Banking transformation programmes, particularly those involving data migration,
+              system cutover, and regulatory sign-off, exhibit exactly the same compression. Planning for this
+              explicitly — building buffer into the final phase rather than distributing it evenly — is a lesson I
+              carried directly from aerospace into every subsequent programme.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="section-rule" />
+
+      <h2>What Does <em>Not</em> Transfer — and Why That Matters</h2>
+
+      <p>
+        Being honest about the limits of transferability is as important as recognising what crosses over. Domain
+        knowledge does not transfer, and it should not be assumed to. The regulatory framework of a banking programme —
+        its specific compliance obligations, its relationship with conduct regulators, its technology architecture —
+        requires genuine domain learning. Cross-industry experience is not a shortcut past that learning. It is a
+        foundation that makes the learning faster and the pattern recognition more acute.
+      </p>
+
+      <div class="compare-table">
+        <div class="compare-header">
+          <span>What transfers across industries</span>
+          <span>What requires domain learning</span>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Governance design and cadence</div>
+          <div class="compare-cell">Regulatory frameworks and obligations</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Dependency management discipline</div>
+          <div class="compare-cell">Technology architecture and integration patterns</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Stakeholder management instincts</div>
+          <div class="compare-cell">Industry-specific stakeholder politics</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">RAID log and risk identification habits</div>
+          <div class="compare-cell">Domain-specific risk categories and their relative weight</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Financial control and EVM discipline</div>
+          <div class="compare-cell">Sector-specific financial structures and reporting requirements</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Change management and scope control</div>
+          <div class="compare-cell">Organisational culture and change appetite by sector</div>
+        </div>
+      </div>
+
+      <p>
+        The cross-industry PM who understands this distinction brings something genuinely valuable to a new sector: a
+        rigorous delivery framework, a pattern-recognition library built across multiple contexts, and a degree of
+        objectivity about how things could be done differently — precisely because they have seen them done differently
+        elsewhere. But that value depends on intellectual humility about what still needs to be learned.
+      </p>
+
+      <div class="pull-quote">
+        "Cross-industry experience is not a shortcut past domain learning. It is a foundation that makes the learning
+        faster and the pattern recognition more acute."
+      </div>
+
+      <h2>The Specific Value of <em>Pattern Recognition at Scale</em></h2>
+
+      <p>
+        There is one advantage of cross-industry delivery experience that I have come to value above the others, and it
+        is harder to articulate than the specific transferable skills. It is the ability to recognise a governance
+        failure — or a delivery risk, or a stakeholder dynamic — at an earlier stage than someone who has only seen it
+        in one industry context.
+      </p>
+
+      <p>
+        When you have seen a particular failure pattern play out across aerospace supply chain programmes and LSEG
+        migration workstreams and Capgemini banking transformation portfolios, you develop an earlier-warning instinct
+        for that pattern. You recognise the shape of it before it has fully formed. A dependency map that looks thin in
+        a particular area. A stakeholder alignment conversation that is being deferred too many times. A risk register
+        that has not moved in four weeks despite a delivery environment that is clearly changing. These are signals, and
+        the ability to read them comes from having seen the same signal — in different clothing — across different
+        industries over many years.
+      </p>
+
+      <p>
+        That is the real compounding return of a cross-industry career. Not just the sum of the skills from each sector,
+        but the pattern recognition that emerges from having held all of them simultaneously — and having learned,
+        industry by industry, what the shape of a complex delivery problem looks like before it becomes a crisis.
+      </p>
+
+      <div class="author-bio">
+        <div class="bio-avatar">SS</div>
+        <div class="bio-text">
+          <h4>Suman Sinha · PMP®</h4>
+          <p>Portfolio Manager and PMO Leader with 15 years across aerospace (Honeywell), financial markets (LSEG),
+            banking transformation (Capgemini), and enterprise technology (TCS). Cross-industry pattern recognition
+            built across four sectors and multiple high-stakes regulatory and transformation programmes. Based in
+            Bengaluru, India.</p>
+        </div>
+      </div>
+
+      <div class="post-nav">
+        <a href="blog-3.html">
+          <span class="nav-dir">← Previous post</span>
+          <span class="nav-title">Lessons from Delivering Under Regulatory Deadlines</span>
+        </a>
+        <a href="blog.html" style="text-align:right;">
+          <span class="nav-dir">All posts →</span>
+          <span class="nav-title">Back to the blog index</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Suman · <a href="index.html">Home</a> · <a href="blog.html">Blog</a> · <a
+        href="https://www.linkedin.com/in/sk-sinha/">LinkedIn</a> · <a href="mailto:suman.sinha@outlook.in">Email</a>
+    </p>
+    <p style="margin-top:0.35rem;">Built with precision, like every programme.</p>
+  </footer>
+
+</body>
+
+</html>
