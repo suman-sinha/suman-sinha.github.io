@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How AI and LLMs Are Changing Requirements Gathering · Suman Sinha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f4f4f4;
+      --bg-card: #ffffff;
+      --border: rgba(0, 0, 0, 0.1);
+      --border-strong: rgba(0, 0, 0, 0.2);
+      --text: #111111;
+      --text-mid: #333333;
+      --text-muted: #666666;
+      --text-dim: #999999;
+      --accent: #222222;
+      --accent-light: #eeeeee;
+      --accent-glow: rgba(0, 0, 0, 0.04);
+      --nav-bg: rgba(255, 255, 255, 0.94);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3rem;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .article-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    .article-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .article-wrap h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.12;
+      color: var(--text);
+      margin-bottom: 1.6rem;
+    }
+
+    .article-wrap h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+
+    .meta-author {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .author-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .meta-date,
+    .meta-read {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .article-tag {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      background: var(--accent-light);
+      border-radius: 2px;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .article-body p {
+      font-size: 1.02rem;
+      color: var(--text-mid);
+      line-height: 1.82;
+      margin-bottom: 1.6rem;
+    }
+
+    .article-body h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--text);
+      margin: 3rem 0 1rem;
+    }
+
+    .article-body h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .article-body h3 {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 2.5rem 0 0.8rem;
+    }
+
+    .pull-quote {
+      margin: 2.5rem 0;
+      padding: 1.6rem 2rem 1.6rem 1.8rem;
+      border-left: 2px solid var(--accent);
+      background: var(--accent-glow);
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* insight cards — numbered grid */
+    .insight-grid {
+      display: grid;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .insight-card {
+      background: var(--bg-card);
+      padding: 1.4rem 1.8rem;
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      transition: background 0.2s;
+    }
+
+    .insight-card:hover {
+      background: var(--bg-alt);
+    }
+
+    .insight-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      opacity: 0.5;
+      line-height: 1;
+      padding-top: 0.1rem;
+    }
+
+    .insight-card h4 {
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+
+    .insight-card p {
+      font-size: 0.85rem !important;
+      color: var(--text-muted) !important;
+      line-height: 1.65 !important;
+      margin: 0 !important;
+    }
+
+    /* two-column comparison table */
+    .compare-table {
+      margin: 2rem 0;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      overflow: hidden;
+    }
+
+    .compare-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compare-header span {
+      padding: 0.7rem 1.4rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .compare-header span:first-child {
+      border-right: 1px solid var(--border);
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .compare-row:last-child {
+      border-bottom: none;
+    }
+
+    .compare-row:hover {
+      background: var(--accent-glow);
+    }
+
+    .compare-cell {
+      padding: 0.9rem 1.4rem;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .compare-cell:first-child {
+      border-right: 1px solid var(--border);
+      color: var(--text-mid);
+    }
+
+    /* callout box */
+    .callout {
+      margin: 2rem 0;
+      padding: 1.4rem 1.8rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+    }
+
+    .callout-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .callout p {
+      font-size: 0.88rem !important;
+      color: var(--text-mid) !important;
+      line-height: 1.7 !important;
+      margin: 0 !important;
+    }
+
+    .section-rule {
+      margin: 2.5rem 0;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .author-bio {
+      margin-top: 3.5rem;
+      padding: 1.8rem 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .bio-avatar {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .bio-text h4 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .bio-text p {
+      font-size: 0.8rem !important;
+      color: var(--text-muted) !important;
+      line-height: 1.6 !important;
+      margin: 0 !important;
+    }
+
+    .post-nav {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .post-nav a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      text-decoration: none;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      flex: 1;
+      min-width: 200px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .post-nav a:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .post-nav .nav-dir {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .post-nav .nav-title {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      line-height: 1.4;
+    }
+
+    /* phase strip — three columns for plan/build/test */
+    .phase-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .phase-card {
+      background: var(--bg-card);
+      padding: 1.4rem 1.5rem;
+      transition: background 0.2s;
+    }
+
+    .phase-card:hover {
+      background: var(--bg-alt);
+    }
+
+    .phase-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .phase-card h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .phase-card p {
+      font-size: 0.82rem !important;
+      color: var(--text-muted) !important;
+      line-height: 1.65 !important;
+      margin: 0 !important;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.2rem 3rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.73rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      background: var(--bg-alt);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .article-wrap {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .compare-header,
+      .compare-row {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-header span:first-child,
+      .compare-cell:first-child {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .phase-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Suman Sinha</a>
+    <ul class="nav-links">
+      <li><a href="index.html#expertise">Expertise</a></li>
+      <li><a href="index.html#career">Career</a></li>
+      <li><a href="index.html#contact">Connect</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+
+    <a href="blog.html" class="back-link">← All posts</a>
+
+    <p class="article-eyebrow">Perspectives · AI in Project Delivery</p>
+
+    <h1>How AI and LLMs Are Changing <em>Requirements Gathering</em></h1>
+
+    <div class="article-meta">
+      <div class="meta-author">
+        <div class="author-dot">SS</div>
+        Suman Sinha · PMP®
+      </div>
+      <span class="meta-date">April 2026</span>
+      <span class="meta-read">10 min read</span>
+      <span class="article-tag">AI</span>
+      <span class="article-tag">Project Delivery</span>
+      <span class="article-tag">Requirements</span>
+    </div>
+
+    <div class="article-body">
+
+      <p>
+        Requirements gathering is where most projects quietly begin to go wrong. Not in a dramatic way — no one declares
+        failure at a kickoff meeting. But the seeds of missed deadlines, budget overruns, and frustrated stakeholders
+        are very often planted in the early weeks, when the team is still trying to understand what it is actually being
+        asked to build.
+      </p>
+
+      <p>
+        I have seen this pattern repeat across industries — aerospace, financial markets, banking technology, enterprise
+        systems. The domain changes. The stakeholders change. But the root cause is usually the same: requirements that
+        were ambiguous, incomplete, or never properly agreed. By the time that becomes visible, the project is already
+        in trouble.
+      </p>
+
+      <p>
+        AI and large language models (LLMs) are starting to change this. Not by replacing the people involved, but by
+        bringing a level of rigour and consistency to the requirements process that manual methods rarely achieve in
+        practice. This post looks at why the traditional approach breaks down, and what AI can genuinely do to improve it.
+      </p>
+
+      <div class="pull-quote">
+        "The seeds of project failure are usually planted in the earliest weeks — when requirements are still being
+        gathered, and ambiguity is still being treated as normal."
+      </div>
+
+      <h2>Where the <em>Manual Process</em> Falls Short</h2>
+
+      <p>
+        Requirements gathering done the traditional way — workshops, interview notes, email threads, spreadsheets,
+        Word documents — is a surprisingly fragile process. The problems are rarely caused by a lack of effort.
+        They are structural. The way information is collected, stored, and communicated creates gaps almost by design.
+      </p>
+
+      <h3>The common failure modes</h3>
+
+      <div class="insight-grid">
+
+        <div class="insight-card">
+          <div class="insight-num">01</div>
+          <div>
+            <h4>Ambiguous Language That Everyone Reads Differently</h4>
+            <p>Phrases like "the system should be fast," "users need flexibility," or "the report should be
+              comprehensive" appear in requirements documents all the time. Each stakeholder who wrote those words had
+              something specific in mind. The developers who read them had something different in mind. No one realises
+              the mismatch until the build is done and the review meeting turns awkward.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">02</div>
+          <div>
+            <h4>Requirements That Live in Different Places</h4>
+            <p>In most projects, requirements are scattered — some in workshop notes, some in emails, some in
+              presentation decks from the business sponsor, some in informal conversations that were never written down
+              at all. Pulling this into a single coherent baseline is time-consuming manual work, and something
+              important nearly always gets missed.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">03</div>
+          <div>
+            <h4>Stakeholder Knowledge That Stays in People's Heads</h4>
+            <p>Subject matter experts often know things that are deeply relevant to what the project needs — edge cases,
+              exceptions, regulatory constraints, process quirks. But extracting that knowledge is hard. A one-hour
+              workshop does not surface fifteen years of operational experience. A lot of what matters gets left out
+              simply because no one knew the right questions to ask.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">04</div>
+          <div>
+            <h4>No Systematic Check for Conflicts and Gaps</h4>
+            <p>When requirements come from multiple stakeholders across different functions, they often contradict each
+              other. The finance team wants one thing. The operations team wants something incompatible. The compliance
+              team adds constraints that neither knew about. Manually reviewing a large requirements set for internal
+              conflicts is laborious and inconsistent — and reviewers who are close to the material tend to read what
+              they expect to see, not what is actually there.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">05</div>
+          <div>
+            <h4>No Traceability Between Requirements and Delivery</h4>
+            <p>Even when requirements are well-written, organisations often lose track of which requirements drove
+              which design decisions, which test cases cover which requirements, and which changes to scope were
+              formally agreed. When something goes wrong at the end — or when a stakeholder raises a concern in UAT —
+              there is no clean audit trail to refer back to.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">06</div>
+          <div>
+            <h4>Version Control Is Usually an Afterthought</h4>
+            <p>Requirements change. That is normal. What is not normal — but very common — is discovering late in a
+              project that different team members have been working from different versions of the requirements document
+              without knowing it. Manual version management is error-prone, and the cost of working from stale
+              requirements compounds quickly.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="callout">
+        <span class="callout-label">The real cost</span>
+        <p>The Standish Group has tracked project outcomes for decades. Poor or unclear requirements consistently rank
+          among the top causes of project failure — contributing to delays, cost overruns, and delivered systems that
+          do not match what the business actually needed. This is not a new problem. But it is one that AI is
+          now meaningfully equipped to help solve.</p>
+      </div>
+
+      <hr class="section-rule" />
+
+      <h2>What AI and LLMs <em>Bring to the Table</em></h2>
+
+      <p>
+        AI tools — particularly LLMs — are well-suited to the specific challenges of requirements work because they are
+        good at exactly the things that humans find tedious and inconsistent: reading large volumes of text and
+        identifying patterns, checking for gaps and contradictions, asking follow-up questions, and converting
+        unstructured input into structured, usable output.
+      </p>
+
+      <p>
+        This is not about automating the requirements process and removing people from it. Stakeholder knowledge,
+        business context, and judgement about priorities cannot be automated. But the supporting work — the capture,
+        organisation, quality checking, and documentation — can be handled far better with AI than without it.
+      </p>
+
+      <h3>The specific benefits</h3>
+
+      <div class="insight-grid">
+
+        <div class="insight-card">
+          <div class="insight-num">01</div>
+          <div>
+            <h4>Structured Elicitation Through Intelligent Questioning</h4>
+            <p>LLMs can be configured to conduct structured requirements elicitation conversations with stakeholders,
+              asking follow-up questions that a busy BA might not think to ask in a time-pressured workshop. When a
+              stakeholder says "the system needs to be flexible," the AI can immediately probe: flexible in what way,
+              for which users, under which conditions, with what constraints? This surfaces depth that interviews
+              routinely miss.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">02</div>
+          <div>
+            <h4>Automatic Consolidation From Multiple Sources</h4>
+            <p>LLMs can ingest workshop transcripts, email threads, presentation decks, legacy documents, and process
+              maps, then synthesise them into a clean, structured requirements register. What would take a BA several
+              days of manual work can be produced in minutes — with sources cited so that every requirement can be
+              traced back to its origin.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">03</div>
+          <div>
+            <h4>Ambiguity Detection and Plain-Language Rewriting</h4>
+            <p>AI tools can scan a requirements document and flag every statement that is vague, unmeasurable, or
+              open to interpretation. They can then suggest specific rewrites: turning "the system should respond
+              quickly" into "the system must return search results within two seconds for 95% of queries under normal
+              load." This alone eliminates a significant proportion of the misunderstandings that typically surface
+              during build or testing.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">04</div>
+          <div>
+            <h4>Conflict and Contradiction Detection</h4>
+            <p>Given a full set of requirements, an LLM can systematically check for internal conflicts — places where
+              two requirements are incompatible, or where a constraint from one stakeholder contradicts an assumption
+              from another. This kind of cross-referencing is exactly what manual review struggles with at scale, and
+              exactly what AI handles well.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">05</div>
+          <div>
+            <h4>Gap Analysis Against Known Standards and Prior Projects</h4>
+            <p>LLMs trained on regulatory frameworks, industry standards, and prior project documentation can identify
+              missing requirements that would not be obvious to someone focused on the current project in isolation.
+              In regulated industries — banking, healthcare, aerospace — this capability is particularly valuable.
+              The AI can flag: "This type of system typically requires a data retention policy. I do not see one in the
+              current requirements."</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">06</div>
+          <div>
+            <h4>Automatic Traceability Matrix Generation</h4>
+            <p>Once requirements are structured, AI tools can automatically generate and maintain a traceability matrix
+              linking each requirement to design decisions, test cases, and change requests. This removes the manual
+              overhead that makes traceability matrices so often out of date in practice — and gives the project a
+              genuine audit trail throughout delivery.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">07</div>
+          <div>
+            <h4>Consistent Documentation, Regardless of Who Contributes</h4>
+            <p>In large projects, requirements documentation is often produced by multiple people with different
+              styles, levels of detail, and interpretations of what "a well-written requirement" looks like. AI can
+              normalise this — ensuring every requirement is structured to the same standard, with consistent
+              terminology, measurement criteria, and format. The resulting document reads as if one disciplined person
+              wrote it.</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-num">08</div>
+          <div>
+            <h4>Real-Time Translation for Diverse Stakeholder Groups</h4>
+            <p>Business stakeholders and technical teams often describe the same need in entirely different language.
+              AI tools can bridge this gap in real time — translating a business stakeholder's operational description
+              into a technically precise specification, and back again for review. This reduces the back-and-forth
+              cycles that slow down requirements sign-off considerably.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="section-rule" />
+
+      <h2>Beyond Requirements: <em>Planning, Build and Testing</em></h2>
+
+      <p>
+        The benefits of AI-assisted requirements work do not stop once the requirements document is signed off. The
+        same structured, traceable, unambiguous requirements baseline that AI helps create also makes every downstream
+        phase better.
+      </p>
+
+      <div class="phase-strip">
+        <div class="phase-card">
+          <span class="phase-label">Phase 01</span>
+          <h4>Planning</h4>
+          <p>Well-structured requirements make estimation more reliable. AI tools can analyse a requirements set and
+            flag high-complexity items, missing dependencies, and scope areas that typically cause planning
+            assumptions to break. They can also generate initial work breakdown structures from requirements, giving
+            the project a faster start on scheduling. When requirements change during planning, AI can immediately
+            show the downstream impact — which tasks are affected, which dependencies shift, and how the critical
+            path moves.</p>
+        </div>
+        <div class="phase-card">
+          <span class="phase-label">Phase 02</span>
+          <h4>Build</h4>
+          <p>During development, teams can query the requirements baseline directly — asking an AI assistant whether a
+            particular edge case is covered, or which requirement drives a specific design decision. This reduces the
+            time developers spend hunting through documents and the informal interpretations they make when they
+            cannot find an answer. Change requests can also be assessed automatically against the requirements
+            baseline: what does this change affect, what needs to be re-tested, and what is the scope impact?</p>
+        </div>
+        <div class="phase-card">
+          <span class="phase-label">Phase 03</span>
+          <h4>Testing</h4>
+          <p>With a clean traceability matrix, AI can generate test case outlines directly from requirements — ensuring
+            every requirement has test coverage and that nothing is left to chance. During UAT, AI can help map
+            defects and feedback back to the specific requirements they relate to, making triage faster and more
+            structured. And because the requirements are unambiguous, there is less room for the arguments about
+            "what we agreed" that typically slow down the testing phase.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="callout-label">The compounding effect</span>
+        <p>The quality of requirements work has a compounding effect on every phase that follows. A project with clean,
+          traceable, unambiguous requirements at the start will plan better, build faster, and test more reliably than
+          one that carries ambiguity through from the beginning. AI does not just improve requirements gathering in
+          isolation — it improves the entire delivery chain.</p>
+      </div>
+
+      <hr class="section-rule" />
+
+      <h2>A Practical <em>Reality Check</em></h2>
+
+      <p>
+        It would be misleading to suggest that AI solves requirements problems automatically. The tools require good
+        inputs — if stakeholders are not willing to engage thoughtfully, or if the source documents are genuinely
+        incomplete, AI cannot manufacture substance that is not there. The technology amplifies what exists; it does
+        not replace it.
+      </p>
+
+      <p>
+        There are also genuine concerns worth taking seriously. Sensitive requirements — those involving personal data,
+        financial information, or proprietary processes — need careful handling before they go near any external AI
+        system. Most organisations will need to think carefully about what they share, where, and under what
+        governance. Private deployments, where the organisation controls the model and the data, address many of these
+        concerns, but require investment.
+      </p>
+
+      <div class="compare-table">
+        <div class="compare-header">
+          <span>Where AI adds clear value</span>
+          <span>Where human judgement remains essential</span>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Flagging vague or unmeasurable language</div>
+          <div class="compare-cell">Deciding which requirements are genuinely important</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Consolidating input from multiple sources</div>
+          <div class="compare-cell">Resolving conflicts between competing stakeholder priorities</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Checking for internal contradictions at scale</div>
+          <div class="compare-cell">Understanding the organisational politics behind requirements</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Maintaining traceability matrices automatically</div>
+          <div class="compare-cell">Assessing whether a requirement is technically feasible</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Generating test case outlines from requirements</div>
+          <div class="compare-cell">Judging whether test results are genuinely acceptable</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Translating between business and technical language</div>
+          <div class="compare-cell">Building trust and consensus with stakeholders</div>
+        </div>
+      </div>
+
+      <p>
+        The most effective approach treats AI as a rigorous, tireless collaborator that handles the structural and
+        analytical work — freeing up the people involved to focus on the judgement, negotiation, and relationship
+        management that genuinely requires human input.
+      </p>
+
+      <div class="pull-quote">
+        "AI does not replace the work of understanding what a project actually needs. It removes the structural
+        noise that prevents that understanding from being captured accurately."
+      </div>
+
+      <h2>What This Means <em>For Project Managers</em></h2>
+
+      <p>
+        For PMs and PMO leaders, this is not a technology question in disguise. It is a delivery quality question.
+        The organisations that adopt AI-assisted requirements practices will, over time, start projects with better
+        baselines, make fewer costly assumptions, and carry less ambiguity into their planning and build phases.
+        Those that do not will continue to absorb the same structural problems in their delivery performance.
+      </p>
+
+      <p>
+        The starting point does not need to be complicated. Most teams can begin with a single AI-assisted review of
+        their next requirements document — checking for ambiguity, gaps, and contradictions. That one step, done
+        consistently, already changes the quality of what goes into delivery. Everything beyond that is incremental
+        from a foundation that is already better.
+      </p>
+
+      <div class="callout">
+        <span class="callout-label">The bottom line</span>
+        <p>Requirements quality is a delivery lever that most organisations under-invest in, because the failure costs
+          are deferred and diffuse. AI gives teams a practical, accessible way to raise that quality systematically —
+          not as a transformation programme, but as a better way of doing work that was always worth doing well.</p>
+      </div>
+
+      <div class="author-bio">
+        <div class="bio-avatar">SS</div>
+        <div class="bio-text">
+          <h4>Suman Sinha · PMP®</h4>
+          <p>Portfolio Manager and PMO Leader with 15 years across aerospace (Honeywell), financial markets (LSEG),
+            banking transformation (Capgemini), and enterprise technology (TCS). Currently exploring how AI and LLM
+            tooling can improve delivery governance, requirements quality, and PMO practice. Based in Bengaluru, India.</p>
+        </div>
+      </div>
+
+      <div class="post-nav">
+        <a href="blog-4.html">
+          <span class="nav-dir">← Previous post</span>
+          <span class="nav-title">What Aerospace Taught Me About Banking Transformation</span>
+        </a>
+        <a href="blog.html" style="text-align:right;">
+          <span class="nav-dir">All posts →</span>
+          <span class="nav-title">Back to the blog index</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Suman · <a href="index.html">Home</a> · <a href="blog.html">Blog</a> · <a
+        href="https://www.linkedin.com/in/sk-sinha/">LinkedIn</a> · <a href="mailto:suman.sinha@outlook.in">Email</a>
+    </p>
+    <p style="margin-top:0.35rem;">Built with precision, like every programme.</p>
+  </footer>
+
+</body>
+
+</html>
